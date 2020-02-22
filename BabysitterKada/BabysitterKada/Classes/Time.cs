@@ -8,7 +8,9 @@ namespace BabysitterKada.Classes
     {
         public static double SubtractTime(string startTime, string endTime)
         {
-            return 6.0;
+            TimeSpan duration = DateTime.Parse(endTime) - DateTime.Parse(startTime);
+
+            return duration.TotalHours;
         }
     }
 }

@@ -8,3 +8,4 @@ C:\Users\natef\source\repos\pillar\BabysitterKada\BabysitterKada\obj\Debug\netco
 C:\Users\natef\source\repos\pillar\BabysitterKada\BabysitterKada\obj\Debug\netcoreapp3.1\BabysitterKada.AssemblyInfo.cs
 C:\Users\natef\source\repos\pillar\BabysitterKada\BabysitterKada\obj\Debug\netcoreapp3.1\BabysitterKada.dll
 C:\Users\natef\source\repos\pillar\BabysitterKada\BabysitterKada\obj\Debug\netcoreapp3.1\BabysitterKada.pdb
+C:\Users\natef\source\repos\pillar\BabysitterKada\BabysitterKada\obj\Debug\netcoreapp3.1\BabysitterKada.csprojAssemblyReference.cache
