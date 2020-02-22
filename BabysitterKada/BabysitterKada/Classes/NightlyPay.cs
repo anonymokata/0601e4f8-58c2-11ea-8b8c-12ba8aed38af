@@ -6,9 +6,19 @@ namespace BabysitterKada.Classes
 {
     public class NightlyPay
     {
-        public double CalculatePay(string startTime, string endTime, double hourlyWage)
+        public string startTime { get; }
+        public string endTime { get; }
+
+
+        public NightlyPay(string startTime, string endTime)
         {
-            double hoursWorked = Time.SubtractTime(startTime, endTime);
+            this.startTime = startTime;
+            this.endTime = endTime;
+        }
+
+        public double CalculatePay(double hourlyWage)
+        {
+            double hoursWorked = Time.SubtractTime(this.startTime, this.endTime);
             return hoursWorked * hourlyWage;
         }
     }

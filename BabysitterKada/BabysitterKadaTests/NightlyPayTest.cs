@@ -10,8 +10,15 @@ namespace BabysitterKadaTests
         [TestMethod]
         public void whenCalculatePayIsGivenSingleRateAndTimesItReturnsDollarsAsDouble()
         {
-            NightlyPay nightlyPay = new NightlyPay();
-            Assert.AreEqual(nightlyPay.CalculatePay("5:00PM", "11:00PM", 15), 90.0);
+            NightlyPay nightlyPay = new NightlyPay("5:00PM", "11:00PM");
+            Assert.AreEqual(nightlyPay.CalculatePay(15), 90.0);
+        }
+
+        public void whenNightlyPayIsPassedAStartAndEndTimeTheGetMethodsReturnCorrectValues()
+        {
+            NightlyPay nightlyPay = new NightlyPay("5:00PM", "11:00PM");
+            Assert.AreEqual(nightlyPay.startTime, "5:00PM");
+            Assert.AreEqual(nightlyPay.endTime, "11:00PM");
         }
     }
 }
