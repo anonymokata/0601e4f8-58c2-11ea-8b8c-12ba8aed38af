@@ -30,6 +30,13 @@ namespace BabysitterKadaTests
         }
 
         [TestMethod]
+        public void whenNightlyPayIsPassedAnEndTimeBeforeMidnightItHasSameDayAsStartTime()
+        {
+            NightlyPay nightlyPay = new NightlyPay("5:00PM", "11:59PM");
+            Assert.AreEqual(nightlyPay.startTime.Day, nightlyPay.endTime.Day);
+        }
+
+        [TestMethod]
         public void whenCalculateEarlyPayIsGivenEndTimeGreaterThanEarlyRateCutoffItIgnoresHoursAfterCutoff()
         {
             NightlyPay nightlyPay = new NightlyPay("5:00PM", "1:00AM");

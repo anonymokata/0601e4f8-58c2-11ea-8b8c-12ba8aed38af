@@ -14,7 +14,7 @@ namespace BabysitterKadaTests
         }
 
         [TestMethod]
-        public void whenGetTimeDifferenceHasTimesOnTwoDifferentDaysItReturnsCorrectTime()
+        public void whenGetTimeDifferenceHasTimesOnTwoDifferentDaysItReturnsCorrectDifference()
         {
             Assert.AreEqual(9.00, Time.GetTimeDifference(DateTime.Parse("5:00PM"), DateTime.Parse("2:00AM").AddDays(1)));
         }
