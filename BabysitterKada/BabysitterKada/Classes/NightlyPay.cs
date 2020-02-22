@@ -6,28 +6,32 @@ namespace BabysitterKada.Classes
 {
     public class NightlyPay
     {
-        public string startTime { get; }
-        public string endTime { get; }
+        public DateTime startTime { get; }
+        public DateTime endTime { get; }
 
 
         public NightlyPay(string startTime, string endTime)
         {
-            this.startTime = startTime;
-            this.endTime = endTime;
+            this.startTime = DateTime.Parse(startTime);
+            this.endTime = DateTime.Parse(endTime);
+            if (this.endTime.Hour < 12)
+            {
+                this.endTime = this.endTime.AddDays(1);
+            }
         }
 
         public double CalculatePay(double hourlyWage)
         {
-            double hoursWorked = Time.SubtractTime(this.startTime, this.endTime);
+            double hoursWorked = Time.GetTimeDifference(this.startTime, this.endTime);
             return hoursWorked * hourlyWage;
         }
 
-        public double CalculateEarlyPay(double earlyHourlyWage, string timeOfEarlyRateCutoff)
+        public double CalculateEarlyPay(double earlyHourlyWage, DateTime timeOfEarlyRateCutoff)
         {
             double hoursWorked = 0;
-            if (DateTime.Parse(this.endTime) > DateTime.Parse(timeOfEarlyRateCutoff))
+            if (this.endTime > timeOfEarlyRateCutoff)
             {
-                hoursWorked = Time.SubtractTime(this.startTime, timeOfEarlyRateCutoff);
+                hoursWorked = Time.GetTimeDifference(this.startTime, timeOfEarlyRateCutoff);
             }
             return hoursWorked * earlyHourlyWage;
         }
