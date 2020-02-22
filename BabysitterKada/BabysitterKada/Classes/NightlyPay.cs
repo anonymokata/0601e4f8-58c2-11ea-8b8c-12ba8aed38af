@@ -21,5 +21,15 @@ namespace BabysitterKada.Classes
             double hoursWorked = Time.SubtractTime(this.startTime, this.endTime);
             return hoursWorked * hourlyWage;
         }
+
+        public double CalculateEarlyPay(double earlyHourlyWage, string timeOfEarlyRateCutoff)
+        {
+            double hoursWorked = 0;
+            if (DateTime.Parse(this.endTime) > DateTime.Parse(timeOfEarlyRateCutoff))
+            {
+                hoursWorked = Time.SubtractTime(this.startTime, timeOfEarlyRateCutoff);
+            }
+            return hoursWorked * earlyHourlyWage;
+        }
     }
 }
