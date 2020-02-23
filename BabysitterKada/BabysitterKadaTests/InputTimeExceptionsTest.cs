@@ -12,6 +12,7 @@ namespace BabysitterKadaTests
         DateTime threePM = DateTime.Parse("3:00PM");
         DateTime sixPM = DateTime.Parse("6:00PM");
         DateTime sixAM = DateTime.Parse("6:00AM").AddDays(1);
+        DateTime fivePM = DateTime.Parse("5:00PM");
 
         [TestMethod]
         public void whenValidateMethodFindsAnExceptionItThrowsArgumentException()
@@ -69,6 +70,21 @@ namespace BabysitterKadaTests
             catch (Exception ex)
             {
                 Assert.AreEqual("Invalid end time. An end time must be before 5:00AM", ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void whenValidateIsPassedAnEndTimeBeforeStartTimeThrowsException()
+        {
+            InputTimeExceptions exceptions = new InputTimeExceptions(sixPM, fivePM);
+            try
+            {
+                exceptions.validate();
+                Assert.Fail("Should thrown an exception");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("End time is not allowed to be before start time.", ex.Message);
             }
         }
     }

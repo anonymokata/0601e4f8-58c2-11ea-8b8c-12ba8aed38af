@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace BabysitterKada.Classes
 {
@@ -21,6 +22,7 @@ namespace BabysitterKada.Classes
         {
             throwExceptionIfStartTimeBeforeAllowedTime();
             throwExceptionIfEndTimeAfterAllowedTime();
+            throwExceptionIfEndTimeBeforeStartTime();
         }
 
         private void throwExceptionIfStartTimeBeforeAllowedTime()
@@ -39,6 +41,12 @@ namespace BabysitterKada.Classes
             }
         }
 
-
+        private void throwExceptionIfEndTimeBeforeStartTime()
+        {
+            if (endTime < startTime)
+            {
+                throw new ArgumentException("End time is not allowed to be before start time.");
+            }
+        }
     }
 }

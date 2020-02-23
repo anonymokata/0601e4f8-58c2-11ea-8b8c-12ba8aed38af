@@ -10,10 +10,10 @@ namespace BabysitterKada.Classes
         public DateTime endTime { get; }
 
 
-        public Night(string startTime, string endTime)
+        public Night(DateTime startTime, DateTime endTime)
         {
-            this.startTime = DateTime.Parse(startTime);
-            this.endTime = Time.AddDayIfTimeIsAM(DateTime.Parse(endTime));
+            this.startTime = startTime;
+            this.endTime = endTime;
         }
     }
 }
