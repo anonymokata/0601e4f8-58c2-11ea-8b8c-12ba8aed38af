@@ -19,6 +19,7 @@ namespace BabysitterKadaTests
             try
             {
                 exceptions.validate();
+                Assert.Fail("Should thrown an exception");
             } 
             catch (Exception ex)
             {
@@ -33,10 +34,25 @@ namespace BabysitterKadaTests
             try
             {
                 exceptions.validate();
+                Assert.Fail("Should thrown an exception");
             }
             catch (Exception ex)
             {
                 Assert.AreEqual("Invalid start time. A start time must be before 5:00PM" , ex.Message);
+            }
+        }
+
+        [TestMethod]
+        public void whenValidateIsPassedAValidStartTimeNoExceptionThrown()
+        {
+            InputTimeExceptions exceptions = new InputTimeExceptions(sixPM, sixPM);
+            try
+            {
+                exceptions.validate();
+            }
+            catch (Exception ex)
+            {
+                Assert.Fail("Should NOT throw an exception" + ex);
             }
         }
     }
