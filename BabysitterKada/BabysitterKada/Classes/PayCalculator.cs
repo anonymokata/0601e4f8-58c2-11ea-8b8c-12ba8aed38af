@@ -16,47 +16,68 @@ namespace BabysitterKada.Classes
 
         public double CalculatePay()
         {
-            double earlyRatePay = this.getEarlyHours(Family.earlyRateEndsAt) * this.Family.earlyRate;
-            double midRatePay = this.getMiddleHours(Family.earlyRateEndsAt, Family.middleRateEndsAt) * this.Family.middleRate;
-            double lateRatePay = this.getLateHours(Family.lateRateBeginsAt) * this.Family.lateRate;
+            double earlyRatePay = getEarlyHours() * Family.earlyRate;
+            double midRatePay = getMiddleHours() * Family.middleRate;
+            double lateRatePay = getLateHours() * Family.lateRate;
             return earlyRatePay + midRatePay + lateRatePay;
         }
 
 
-        public double getEarlyHours(DateTime earlyRateEndsAt)
+        public double getEarlyHours()
         {
             double hoursWorked = 0;
-            if (this.Night.endTime >= earlyRateEndsAt)
+            if (workedPastNextRateBeginTime(Family.earlyRateEndsAt))
             {
-                hoursWorked = Time.GetTimeDifference(this.Night.startTime, earlyRateEndsAt);
+                hoursWorked = fromStartTo(Family.earlyRateEndsAt);
             }
             else
             {
-                hoursWorked = Time.GetTimeDifference(this.Night.startTime, this.Night.endTime);
+                hoursWorked = fromStartTo(Night.endTime);
             }
             return hoursWorked;
         }
 
-        public double getMiddleHours(DateTime earlyRateEndsAt, DateTime middleRateEndsAt)
+        private Boolean workedPastNextRateBeginTime (DateTime nextRateBeginTime)
+        {
+            return Night.endTime >= nextRateBeginTime;
+        }
+
+        private double fromStartTo(DateTime endTime)
+        {
+            return Time.GetTimeDifference(Night.startTime, endTime);
+        }
+
+        public double getMiddleHours()
         {
             double midRateHoursWorked = 0;
-            if (this.Night.endTime >= earlyRateEndsAt && this.Night.endTime <= middleRateEndsAt)
+            if (workedPastNextRateBeginTime(Family.earlyRateEndsAt) && didNotWorkLate())
             {
-                midRateHoursWorked = Time.GetTimeDifference(earlyRateEndsAt, this.Night.endTime);
+                midRateHoursWorked = fromEarlyRateEndTo(Night.endTime);
             }
-            else if (this.Night.endTime >= middleRateEndsAt)
+            else if (workedPastNextRateBeginTime(Family.middleRateEndsAt))
             {
-                midRateHoursWorked = Time.GetTimeDifference(earlyRateEndsAt, middleRateEndsAt);
+                midRateHoursWorked = fromEarlyRateEndTo(Family.lateRateBeginsAt);
             }
             return midRateHoursWorked;
         }
 
-        public double getLateHours(DateTime lateTimeBeginsAt)
+        private Boolean didNotWorkLate()
+        {
+            return Night.endTime <= Family.lateRateBeginsAt;
+        }
+
+        private double fromEarlyRateEndTo(DateTime endTime)
+        {
+            return Time.GetTimeDifference(Family.earlyRateEndsAt, endTime);
+        }
+
+
+        public double getLateHours()
         {
             double lateRateHoursWorked = 0;
-            if (this.Night.endTime >= lateTimeBeginsAt)
+            if (workedPastNextRateBeginTime(Family.lateRateBeginsAt))
             {
-                lateRateHoursWorked = Time.GetTimeDifference(lateTimeBeginsAt, this.Night.endTime);
+                lateRateHoursWorked = Time.GetTimeDifference(Family.lateRateBeginsAt, Night.endTime);
             }
             return lateRateHoursWorked;
         }

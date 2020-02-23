@@ -16,44 +16,6 @@ namespace BabysitterKada.Classes
             this.endTime = Time.AddDayIfTimeIsAM(DateTime.Parse(endTime));
         }
 
-        public double getEarlyHours(DateTime earlyRateEndsAt)
-        {
-            double hoursWorked = 0;
-            if (this.endTime >= earlyRateEndsAt)
-            {
-                hoursWorked = Time.GetTimeDifference(this.startTime, earlyRateEndsAt);
-            }
-            else
-            {
-                hoursWorked = Time.GetTimeDifference(this.startTime, this.endTime);
-            }
-            return hoursWorked;
-        }
-
-        public double getMiddleHours(DateTime earlyRateEndsAt, DateTime middleRateEndsAt)
-        {
-            double midRateHoursWorked = 0;
-            if (this.endTime >= earlyRateEndsAt && this.endTime <= middleRateEndsAt)
-            {
-                midRateHoursWorked = Time.GetTimeDifference(earlyRateEndsAt, this.endTime);
-            }
-            else if (this.endTime >= middleRateEndsAt)
-            {
-                midRateHoursWorked = Time.GetTimeDifference(earlyRateEndsAt, middleRateEndsAt);
-            }
-            return midRateHoursWorked;
-        }
-
-        public double getLateHours(DateTime lateTimeBeginsAt)
-        {
-            double lateRateHoursWorked = 0;
-            if (this.endTime >= lateTimeBeginsAt)
-            {
-                lateRateHoursWorked = Time.GetTimeDifference(lateTimeBeginsAt, this.endTime);
-            }
-            return lateRateHoursWorked;
-        }
-
         public Boolean IsLatePayRequired(DateTime latePayBeginTime)
         {
             if (this.endTime > latePayBeginTime)
