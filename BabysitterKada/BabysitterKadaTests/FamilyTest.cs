@@ -10,11 +10,17 @@ namespace BabysitterKadaTests
     public class FamilyTest
     {
         [TestMethod]
-        public void whenAFamilyObjectIsCreatedItHasEarlyAndLateRateGetters()
+        public void whenAFamilyObjectIsCreatedWith3ParamsItsLateRateBeginsIsTheEarlyRateCutoffTime()
         {
             Family family = new Family(15, 20, "11:00PM");
-            Assert.AreEqual(15.0, family.earlyRate);
-            Assert.AreEqual(20.0, family.lateRate);
+            Assert.AreEqual(family.lateRateBeginsAt, family.earlyRateEndsAt);
+        }
+
+        [TestMethod]
+        public void whenAFamilyObjectIsCreatedWith5ParamsItsLateRateBeginsIsTheMidRateCutoffTime()
+        {
+            Family family = new Family(12, 8, 16, "10:00PM", "12:00AM");
+            Assert.AreEqual(family.lateRateBeginsAt, family.middleRateEndsAt);
         }
     }
 }
