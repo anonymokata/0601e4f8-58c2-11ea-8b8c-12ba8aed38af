@@ -9,10 +9,13 @@ namespace BabysitterKadaTests
     [TestClass]
     public class InputTimeExceptionsTest
     {
+        DateTime threePM = DateTime.Parse("3:00PM");
+        DateTime sixPM = DateTime.Parse("6:00PM");
+
         [TestMethod]
         public void whenValidateMethodFindsAnExceptionItThrowsArgumentException()
         {
-            InputTimeExceptions exceptions = new InputTimeExceptions();
+            InputTimeExceptions exceptions = new InputTimeExceptions(threePM, sixPM);
             try
             {
                 exceptions.validate();
@@ -26,7 +29,7 @@ namespace BabysitterKadaTests
         [TestMethod]
         public void whenValidateIsPassedAnInvalidStartTimeItThrowsAnException()
         {
-            InputTimeExceptions exceptions = new InputTimeExceptions();
+            InputTimeExceptions exceptions = new InputTimeExceptions(threePM, sixPM);
             try
             {
                 exceptions.validate();
