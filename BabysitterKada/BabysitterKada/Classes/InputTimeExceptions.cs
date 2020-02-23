@@ -10,6 +10,7 @@ namespace BabysitterKada.Classes
         private DateTime endTime;
 
         private DateTime EARLIEST_START_TIME_ALLOWED = DateTime.Parse("5:00PM");
+        private DateTime LATEST_END_TIME_ALLOWED = DateTime.Parse("5:00AM").AddDays(1);
 
         public InputTimeExceptions (DateTime startTime, DateTime endTime)
         {
@@ -19,15 +20,25 @@ namespace BabysitterKada.Classes
         public void validate()
         {
             throwExceptionIfStartTimeBeforeAllowedTime();
+            throwExceptionIfEndTimeAfterAllowedTime();
         }
 
         private void throwExceptionIfStartTimeBeforeAllowedTime()
         {
             if (startTime < EARLIEST_START_TIME_ALLOWED)
             {
-                throw new ArgumentException("Invalid start time. A start time must be before 5:00PM");
+                throw new ArgumentException("Invalid start time. A start time must be after 5:00PM");
             }
         }
+
+        private void throwExceptionIfEndTimeAfterAllowedTime()
+        {
+            if (endTime > LATEST_END_TIME_ALLOWED)
+            {
+                throw new ArgumentException("Invalid end time. An end time must be before 5:00AM");
+            }
+        }
+
 
     }
 }
