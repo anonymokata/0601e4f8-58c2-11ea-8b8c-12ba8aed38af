@@ -43,13 +43,20 @@ namespace BabysitterKadaTests
             Assert.AreEqual(6.0, Night.getEarlyHours(DateTime.Parse("11:00PM")));
         }
 
-
         [TestMethod]
-        public void whenCalculateEarlyPayIsGivenEndTimeBeforeEarlyCutoffItReturnsDollarsEarned()
+        public void whenGetEarlyHoursIsGivenEndTimeBeforeEarlyCutoffItReturnsCorrectHours()
         {
             Night Night = new Night("5:00PM", "8:00PM");
             Assert.AreEqual(3.0, Night.getEarlyHours(DateTime.Parse("11:00PM")));
         }
+
+        [TestMethod]
+        public void whenGetMiddleHoursIsPassedATimeWindowItReturnsHoursWorkedInThatWindow()
+        {
+            Night Night = new Night("5:00PM", "1:00AM");
+            Assert.AreEqual(2.0, Night.getMiddleHours(DateTime.Parse("10:00PM"), DateTime.Parse("12:00AM").AddDays(1)));
+        }
+
 
         [TestMethod]
         public void whenIsLatePayRequiredTakesEndTimeBeforeLatePayTimeReturnsFalse()
