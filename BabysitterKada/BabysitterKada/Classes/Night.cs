@@ -16,12 +16,6 @@ namespace BabysitterKada.Classes
             this.endTime = Time.AddDayIfTimeIsAM(DateTime.Parse(endTime));
         }
 
-        public double CalculatePay(double hourlyWage)
-        {
-            double hoursWorked = Time.GetTimeDifference(this.startTime, this.endTime);
-            return hoursWorked * hourlyWage;
-        }
-
         public double getEarlyHours(DateTime earlyRateEndsAt)
         {
             double hoursWorked = 0;

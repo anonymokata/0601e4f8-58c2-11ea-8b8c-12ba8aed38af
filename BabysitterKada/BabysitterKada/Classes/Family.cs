@@ -33,5 +33,13 @@ namespace BabysitterKada.Classes
             this.middleRateEndsAt = Time.AddDayIfTimeIsAM(DateTime.Parse(middleRateEndsAt));
             this.lateRateBeginsAt = this.middleRateEndsAt;
         }
+
+        public double CalculatePay(double earlyHours, double midHours, double lateHours)
+        {
+            double earlyRatePay = earlyHours * this.earlyRate;
+            double midRatePay = midHours * this.middleRate;
+            double lateRatePay = lateHours * this.lateRate;
+            return earlyRatePay + midRatePay + lateRatePay;
+        }
     }
 }

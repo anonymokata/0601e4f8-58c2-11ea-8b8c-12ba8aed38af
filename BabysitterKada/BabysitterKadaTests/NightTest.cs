@@ -12,12 +12,6 @@ namespace BabysitterKadaTests
         Night endAtEightPM = new Night("5:00PM", "8:00PM");
 
         [TestMethod]
-        public void whenCalculatePayIsGivenSingleRateAndTimeItReturnsDollarsAsDouble()
-        {
-            Assert.AreEqual(90.0, endAtElevenPM.CalculatePay(15));
-        }
-
-        [TestMethod]
         public void whenNightIsPassedAStartAndEndTimeTheGetMethodsReturnDateTimes()
         {
             Assert.AreEqual("5:00PM", endAtElevenPM.startTime.ToString("h:mmtt"));
