@@ -4,13 +4,13 @@ using System.Text;
 
 namespace BabysitterKada.Classes
 {
-    public class NightlyPay
+    public class Night
     {
         public DateTime startTime { get; }
         public DateTime endTime { get; }
 
 
-        public NightlyPay(string startTime, string endTime)
+        public Night(string startTime, string endTime)
         {
             this.startTime = DateTime.Parse(startTime);
             this.endTime = DateTime.Parse(endTime);
@@ -26,7 +26,7 @@ namespace BabysitterKada.Classes
             return hoursWorked * hourlyWage;
         }
 
-        public double CalculateEarlyPay(double earlyHourlyWage, DateTime earlyCutoff)
+        public double getEarlyHours(DateTime earlyCutoff)
         {
             double hoursWorked = 0;
             if (this.endTime >= earlyCutoff)
@@ -37,7 +37,7 @@ namespace BabysitterKada.Classes
             {
                 hoursWorked = Time.GetTimeDifference(this.startTime, this.endTime);
             }
-            return hoursWorked * earlyHourlyWage;
+            return hoursWorked;
         }
 
         public Boolean IsLatePayRequired(DateTime latePayBeginTime)
