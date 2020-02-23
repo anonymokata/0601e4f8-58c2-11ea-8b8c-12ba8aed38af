@@ -6,9 +6,9 @@ namespace BabysitterKada.Classes
 {
     public class Family
     {
-        private double earlyRate;
-        private double lateRate;
-        private double middleRate;
+        public double earlyRate;
+        public double lateRate;
+        public double middleRate;
 
         public DateTime earlyRateEndsAt { get; }
         public DateTime middleRateEndsAt { get; }
@@ -32,14 +32,6 @@ namespace BabysitterKada.Classes
             this.earlyRateEndsAt = Time.AddDayIfTimeIsAM(DateTime.Parse(earlyRateEndsAt));
             this.middleRateEndsAt = Time.AddDayIfTimeIsAM(DateTime.Parse(middleRateEndsAt));
             this.lateRateBeginsAt = this.middleRateEndsAt;
-        }
-
-        public double CalculatePay(double earlyHours, double midHours, double lateHours)
-        {
-            double earlyRatePay = earlyHours * this.earlyRate;
-            double midRatePay = midHours * this.middleRate;
-            double lateRatePay = lateHours * this.lateRate;
-            return earlyRatePay + midRatePay + lateRatePay;
         }
     }
 }

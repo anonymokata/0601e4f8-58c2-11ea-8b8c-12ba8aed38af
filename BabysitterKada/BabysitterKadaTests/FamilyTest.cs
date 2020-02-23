@@ -22,12 +22,5 @@ namespace BabysitterKadaTests
             Family family = new Family(12, 8, 16, "10:00PM", "12:00AM");
             Assert.AreEqual(family.lateRateBeginsAt, family.middleRateEndsAt);
         }
-
-        [TestMethod]
-        public void whenCalculatePayIsPassed3ParamsOfHoursWorkedItReturnsSumOfHoursAtDifferentRates()
-        {
-            Family family = new Family(12, 8, 16, "10:00PM", "12:00AM");
-            Assert.AreEqual(36.0, family.CalculatePay(1, 1, 1));
-        }
     }
 }
