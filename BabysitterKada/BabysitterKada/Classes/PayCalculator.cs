@@ -14,11 +14,11 @@ namespace BabysitterKada.Classes
             this.Night = night;
         }
 
-        public double CalculatePay(double earlyHours, double midHours, double lateHours)
+        public double CalculatePay()
         {
-            double earlyRatePay = earlyHours * this.Family.earlyRate;
-            double midRatePay = midHours * this.Family.middleRate;
-            double lateRatePay = lateHours * this.Family.lateRate;
+            double earlyRatePay = this.getEarlyHours(Family.earlyRateEndsAt) * this.Family.earlyRate;
+            double midRatePay = this.getMiddleHours(Family.earlyRateEndsAt, Family.middleRateEndsAt) * this.Family.middleRate;
+            double lateRatePay = this.getLateHours(Family.lateRateBeginsAt) * this.Family.lateRate;
             return earlyRatePay + midRatePay + lateRatePay;
         }
 

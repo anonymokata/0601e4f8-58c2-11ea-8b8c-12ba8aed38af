@@ -15,15 +15,6 @@ namespace BabysitterKadaTests
         Family family = new Family(12, 8, 16, "10:00PM", "12:00AM");
 
         [TestMethod]
-        public void whenCalculatePayIsPassed3ParamsOfHoursWorkedItReturnsSumOfHoursAtDifferentRates()
-        {
-            Family family = new Family(12, 8, 16, "10:00PM", "12:00AM");
-            Night night = new Night("5:00PM", "8:00PM");
-            PayCalculator calculator = new PayCalculator(family, night);
-            Assert.AreEqual(36.0, calculator.CalculatePay(1, 1, 1));
-        }
-
-        [TestMethod]
         public void whenGetEarlyHoursIsGivenEndTimeAfterEarlyCutoffItIgnoresHoursAfterCutoff()
         {
             Night night = new Night("5:00PM", "1:00AM");
@@ -83,5 +74,13 @@ namespace BabysitterKadaTests
             Assert.AreEqual(false, calc.IsLatePayRequired(DateTime.Parse("11:00PM")));
         }
 
+        [TestMethod]
+        public void whenCalculatePayIsPassed3ParamsOfHoursWorkedItReturnsSumOfHoursAtDifferentRates()
+        {
+            Family family = new Family(12, 8, 16, "10:00PM", "12:00AM");
+            Night night = new Night("5:00PM", "8:00PM");
+            PayCalculator calculator = new PayCalculator(family, night);
+            Assert.AreEqual(36.0, calculator.CalculatePay());
+        }
     }
 }
