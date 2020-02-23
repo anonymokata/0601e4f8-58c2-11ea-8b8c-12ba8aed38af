@@ -7,26 +7,27 @@ namespace BabysitterKadaTests
     [TestClass]
     public class NightTest
     {
+        Night endAtElevenPM = new Night("5:00PM", "11:00PM");
+        Night endAtTwoAM = new Night("5:00PM", "2:00AM");
+        Night endAtEightPM = new Night("5:00PM", "8:00PM");
+
         [TestMethod]
         public void whenCalculatePayIsGivenSingleRateAndTimeItReturnsDollarsAsDouble()
         {
-            Night Night = new Night("5:00PM", "11:00PM");
-            Assert.AreEqual(90.0, Night.CalculatePay(15));
+            Assert.AreEqual(90.0, endAtElevenPM.CalculatePay(15));
         }
 
         [TestMethod]
         public void whenNightIsPassedAStartAndEndTimeTheGetMethodsReturnDateTimes()
         {
-            Night Night = new Night("5:00PM", "11:00PM");
-            Assert.AreEqual("5:00PM", Night.startTime.ToString("h:mmtt"));
-            Assert.AreEqual("11:00PM", Night.endTime.ToString("h:mmtt"));
+            Assert.AreEqual("5:00PM", endAtElevenPM.startTime.ToString("h:mmtt"));
+            Assert.AreEqual("11:00PM", endAtElevenPM.endTime.ToString("h:mmtt"));
         }
 
         [TestMethod]
         public void whenNightIsPassedAnEndTimeAfterMidnightItAddsADayToEndTimeDate()
         {
-            Night Night = new Night("5:00PM", "2:00AM");
-            Assert.AreEqual(Night.startTime.Day + 1, Night.endTime.Day);
+            Assert.AreEqual(endAtTwoAM.startTime.Day + 1, endAtTwoAM.endTime.Day);
         }
 
         [TestMethod]
@@ -46,8 +47,7 @@ namespace BabysitterKadaTests
         [TestMethod]
         public void whenGetEarlyHoursIsGivenEndTimeBeforeEarlyCutoffItReturnsCorrectHours()
         {
-            Night Night = new Night("5:00PM", "8:00PM");
-            Assert.AreEqual(3.0, Night.getEarlyHours(DateTime.Parse("11:00PM")));
+            Assert.AreEqual(3.0, endAtEightPM.getEarlyHours(DateTime.Parse("11:00PM")));
         }
 
         [TestMethod]
@@ -65,17 +65,15 @@ namespace BabysitterKadaTests
         }
 
         [TestMethod]
-        public void whenGetMiddleHoursIsPassedAnEndTimeLessThanTheMiddleTimeWindowItReturns0()
+        public void whenGetMiddleHoursHasAnEndTimeLessThanTheMiddleTimeWindowItReturns0()
         {
-            Night Night = new Night("5:00PM", "8:00PM");
-            Assert.AreEqual(0, Night.getMiddleHours(DateTime.Parse("10:00PM"), DateTime.Parse("12:00AM").AddDays(1)));
+            Assert.AreEqual(0, endAtEightPM.getMiddleHours(DateTime.Parse("10:00PM"), DateTime.Parse("12:00AM").AddDays(1)));
         }
 
         [TestMethod]
-        public void whenIsLatePayRequiredTakesEndTimeBeforeLatePayTimeReturnsFalse()
+        public void whenIsLatePayRequiredHasEndTimeBeforeLatePayStartTimeReturnsFalse()
         {
-            Night Night = new Night("5:00PM", "8:00PM");
-            Assert.AreEqual(false, Night.IsLatePayRequired(DateTime.Parse("11:00PM")));
+            Assert.AreEqual(false, endAtEightPM.IsLatePayRequired(DateTime.Parse("11:00PM")));
         }
 
         [TestMethod]
