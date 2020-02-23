@@ -54,7 +54,7 @@ namespace BabysitterKada.Classes
             {
                 midRateHoursWorked = fromEarlyRateEndTo(Night.endTime);
             }
-            else if (workedPastNextRateBeginTime(Family.middleRateEndsAt))
+            else if (workedPastNextRateBeginTime(Family.lateRateBeginsAt))
             {
                 midRateHoursWorked = fromEarlyRateEndTo(Family.lateRateBeginsAt);
             }
@@ -71,7 +71,6 @@ namespace BabysitterKada.Classes
             return Time.GetTimeDifference(Family.earlyRateEndsAt, endTime);
         }
 
-
         public double getLateHours()
         {
             double lateRateHoursWorked = 0;
@@ -80,18 +79,6 @@ namespace BabysitterKada.Classes
                 lateRateHoursWorked = Time.GetTimeDifference(Family.lateRateBeginsAt, Night.endTime);
             }
             return lateRateHoursWorked;
-        }
-
-        public Boolean IsLatePayRequired(DateTime latePayBeginTime)
-        {
-            if (this.Night.endTime > latePayBeginTime)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
         }
 
     }

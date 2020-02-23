@@ -30,13 +30,5 @@ namespace BabysitterKadaTests
             Night Night = new Night("5:00PM", "11:59PM");
             Assert.AreEqual(Night.startTime.Day, Night.endTime.Day);
         }
-
-        [TestMethod]
-        public void whenIsLatePayRequiredHasEndTimeAfterLatePayStartTimeReturnsTrue()
-        {
-            Night Night = new Night("5:00PM", "1:00AM");
-            Assert.AreEqual(true, Night.IsLatePayRequired(DateTime.Parse("11:00PM")));
-        }
-
     }
 }

@@ -15,17 +15,5 @@ namespace BabysitterKada.Classes
             this.startTime = DateTime.Parse(startTime);
             this.endTime = Time.AddDayIfTimeIsAM(DateTime.Parse(endTime));
         }
-
-        public Boolean IsLatePayRequired(DateTime latePayBeginTime)
-        {
-            if (this.endTime > latePayBeginTime)
-            {
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
     }
 }
