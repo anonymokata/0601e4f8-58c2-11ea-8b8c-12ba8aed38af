@@ -68,13 +68,6 @@ namespace BabysitterKadaTests
         }
 
         [TestMethod]
-        public void whenIsLatePayRequiredHasEndTimeBeforeLatePayStartTimeReturnsFalse()
-        {
-            PayCalculator calc = new PayCalculator(family, endAtEightPM);
-            Assert.AreEqual(false, calc.IsLatePayRequired(DateTime.Parse("11:00PM")));
-        }
-
-        [TestMethod]
         public void whenCalculatePayIsCalledForJustEarlyRateItReturnsCorrectDolars()
         {
             Family family = new Family(12, 8, 16, "10:00PM", "12:00AM");
