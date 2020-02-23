@@ -42,7 +42,16 @@ namespace BabysitterKada.Classes
 
         public double getMiddleHours(DateTime earlyRateEndsAt, DateTime middleRateEndsAt)
         {
-            return Time.GetTimeDifference(earlyRateEndsAt, middleRateEndsAt);
+            double midRateHoursWorked = 0;
+            if (this.endTime >= earlyRateEndsAt && this.endTime <= middleRateEndsAt)
+            {
+                midRateHoursWorked = Time.GetTimeDifference(earlyRateEndsAt, this.endTime);
+            }
+            else if (this.endTime >= middleRateEndsAt)
+            {
+                midRateHoursWorked = Time.GetTimeDifference(earlyRateEndsAt, middleRateEndsAt);
+            }
+            return midRateHoursWorked;
         }
 
         public Boolean IsLatePayRequired(DateTime latePayBeginTime)
