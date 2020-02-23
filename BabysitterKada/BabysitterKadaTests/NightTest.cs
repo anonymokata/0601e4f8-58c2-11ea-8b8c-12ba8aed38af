@@ -32,58 +32,6 @@ namespace BabysitterKadaTests
         }
 
         [TestMethod]
-        public void whenGetEarlyHoursIsGivenEndTimeAfterEarlyCutoffItIgnoresHoursAfterCutoff()
-        {
-            Night Night = new Night("5:00PM", "1:00AM");
-            Assert.AreEqual(6.0, Night.getEarlyHours(DateTime.Parse("11:00PM")));
-        }
-
-        [TestMethod]
-        public void whenGetEarlyHoursIsGivenEndTimeBeforeEarlyCutoffItReturnsCorrectHours()
-        {
-            Assert.AreEqual(3.0, endAtEightPM.getEarlyHours(DateTime.Parse("11:00PM")));
-        }
-
-        [TestMethod]
-        public void whenGetMiddleHoursIsPassedAnEndTimeAfterMiddleTimeWindowItReturnsHoursWorkedInThatWindow()
-        {
-            Night Night = new Night("5:00PM", "1:00AM");
-            Assert.AreEqual(2.0, Night.getMiddleHours(DateTime.Parse("10:00PM"), DateTime.Parse("12:00AM").AddDays(1)));
-        }
-
-        [TestMethod]
-        public void whenGetMiddleHoursIsPassedAnEndTimeBetweenMiddleTimeWindowItReturnsHoursWorkedInThatWindow()
-        {
-            Night Night = new Night("5:00PM", "11:00PM");
-            Assert.AreEqual(1.0, Night.getMiddleHours(DateTime.Parse("10:00PM"), DateTime.Parse("12:00AM").AddDays(1)));
-        }
-
-        [TestMethod]
-        public void whenGetMiddleHoursHasAnEndTimeLessThanTheMiddleTimeWindowItReturns0()
-        {
-            Assert.AreEqual(0, endAtEightPM.getMiddleHours(DateTime.Parse("10:00PM"), DateTime.Parse("12:00AM").AddDays(1)));
-        }
-
-
-        [TestMethod]
-        public void whenGetLateHoursHasAnEndTimeGreaterThanLateBeginTimeReturnsHours()
-        {
-            Assert.AreEqual(4.0, endAtTwoAM.getLateHours(DateTime.Parse("10:00PM")));
-        }
-
-        [TestMethod]
-        public void whenGetLateHoursHasAnEndTimeLessThanLateBeginTimeReturnsZero()
-        {
-            Assert.AreEqual(0, endAtElevenPM.getLateHours(DateTime.Parse("12:00AM").AddDays(1)));
-        }
-
-        [TestMethod]
-        public void whenIsLatePayRequiredHasEndTimeBeforeLatePayStartTimeReturnsFalse()
-        {
-            Assert.AreEqual(false, endAtEightPM.IsLatePayRequired(DateTime.Parse("11:00PM")));
-        }
-
-        [TestMethod]
         public void whenIsLatePayRequiredHasEndTimeAfterLatePayStartTimeReturnsTrue()
         {
             Night Night = new Night("5:00PM", "1:00AM");
