@@ -13,11 +13,7 @@ namespace BabysitterKada.Classes
         public Night(string startTime, string endTime)
         {
             this.startTime = DateTime.Parse(startTime);
-            this.endTime = DateTime.Parse(endTime);
-            if (this.endTime.Hour < 12)
-            {
-                this.endTime = this.endTime.AddDays(1);
-            }
+            this.endTime = Time.AddDayIfTimeIsAM(DateTime.Parse(endTime));
         }
 
         public double CalculatePay(double hourlyWage)
