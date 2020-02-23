@@ -12,5 +12,15 @@ namespace BabysitterKada.Classes
 
             return duration.TotalHours;
         }
+
+        public static DateTime AddDayIfTimeIsAM(DateTime time)
+        {
+            if (time.Hour < 12)
+            {
+                time = time.AddDays(1);
+            }
+
+            return time;
+        }
     }
 }

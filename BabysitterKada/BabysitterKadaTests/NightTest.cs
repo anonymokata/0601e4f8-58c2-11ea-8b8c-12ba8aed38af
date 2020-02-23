@@ -70,6 +70,19 @@ namespace BabysitterKadaTests
             Assert.AreEqual(0, endAtEightPM.getMiddleHours(DateTime.Parse("10:00PM"), DateTime.Parse("12:00AM").AddDays(1)));
         }
 
+
+        [TestMethod]
+        public void whenGetLateHoursHasAnEndTimeGreaterThanLateBeginTimeReturnsHours()
+        {
+            Assert.AreEqual(4.0, endAtTwoAM.getLateHours(DateTime.Parse("10:00PM")));
+        }
+
+        [TestMethod]
+        public void whenGetLateHoursHasAnEndTimeLessThanLateBeginTimeReturnsZero()
+        {
+            Assert.AreEqual(0, endAtElevenPM.getLateHours(DateTime.Parse("12:00AM").AddDays(1)));
+        }
+
         [TestMethod]
         public void whenIsLatePayRequiredHasEndTimeBeforeLatePayStartTimeReturnsFalse()
         {
@@ -77,7 +90,7 @@ namespace BabysitterKadaTests
         }
 
         [TestMethod]
-        public void whenIsLatePayRequiredTakesEndTimeAfterLatePayTimeReturnsTrue()
+        public void whenIsLatePayRequiredHasEndTimeAfterLatePayStartTimeReturnsTrue()
         {
             Night Night = new Night("5:00PM", "1:00AM");
             Assert.AreEqual(true, Night.IsLatePayRequired(DateTime.Parse("11:00PM")));
