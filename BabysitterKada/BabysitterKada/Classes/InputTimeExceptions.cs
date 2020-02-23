@@ -8,7 +8,11 @@ namespace BabysitterKada.Classes
     {
         public void validate()
         {
-            throw new ArgumentException("Error");
+            DateTime startTime = DateTime.Parse("3:00PM");
+            if (startTime < DateTime.Parse("5:00PM"))
+            {
+                throw new ArgumentException("Invalid start time. A start time must be before 5:00PM");
+            }
         }
     }
 }

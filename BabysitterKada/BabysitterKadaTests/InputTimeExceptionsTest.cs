@@ -22,5 +22,19 @@ namespace BabysitterKadaTests
                 Assert.IsTrue(ex is ArgumentException);
             }   
         }
+
+        [TestMethod]
+        public void whenValidateIsPassedAnInvalidStartTimeItThrowsAnException()
+        {
+            InputTimeExceptions exceptions = new InputTimeExceptions();
+            try
+            {
+                exceptions.validate();
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("Invalid start time. A start time must be before 5:00PM" , ex.Message);
+            }
+        }
     }
 }
