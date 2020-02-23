@@ -8,7 +8,6 @@ namespace BabysitterKada.Classes
     {
         public static double GetTimeDifference(DateTime startTime, DateTime endTime)
         {
-
             TimeSpan duration = endTime - startTime;
 
             return duration.TotalHours;

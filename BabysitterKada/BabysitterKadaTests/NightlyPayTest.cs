@@ -15,7 +15,7 @@ namespace BabysitterKadaTests
         }
 
         [TestMethod]
-        public void whenNightlyPayIsPassedAStartAndEndTimeTheGetMethodsReturnValidDateTimes()
+        public void whenNightlyPayIsPassedAStartAndEndTimeTheGetMethodsReturnDateTimes()
         {
             NightlyPay nightlyPay = new NightlyPay("5:00PM", "11:00PM");
             Assert.AreEqual("5:00PM", nightlyPay.startTime.ToString("h:mmtt"));
@@ -37,10 +37,33 @@ namespace BabysitterKadaTests
         }
 
         [TestMethod]
-        public void whenCalculateEarlyPayIsGivenEndTimeGreaterThanEarlyRateCutoffItIgnoresHoursAfterCutoff()
+        public void whenCalculateEarlyPayIsGivenEndTimeAfterEarlyRateCutoffItIgnoresHoursAfterCutoff()
         {
             NightlyPay nightlyPay = new NightlyPay("5:00PM", "1:00AM");
             Assert.AreEqual(90, nightlyPay.CalculateEarlyPay(15, DateTime.Parse("11:00PM")));
         }
+
+
+        [TestMethod]
+        public void whenCalculateEarlyPayIsGivenEndTimeBeforeEarlyRateCutoffItReturnsDollarsEarned()
+        {
+            NightlyPay nightlyPay = new NightlyPay("5:00PM", "8:00PM");
+            Assert.AreEqual(45, nightlyPay.CalculateEarlyPay(15, DateTime.Parse("11:00PM")));
+        }
+
+        [TestMethod]
+        public void whenIsLatePayRequiredTakesEndTimeBeforeLatePayTimeReturnsFalse()
+        {
+            NightlyPay nightlyPay = new NightlyPay("5:00PM", "8:00PM");
+            Assert.AreEqual(false, nightlyPay.IsLatePayRequired(DateTime.Parse("11:00PM")));
+        }
+
+        [TestMethod]
+        public void whenIsLatePayRequiredTakesEndTimeAfterLatePayTimeReturnsTrue()
+        {
+            NightlyPay nightlyPay = new NightlyPay("5:00PM", "1:00AM");
+            Assert.AreEqual(true, nightlyPay.IsLatePayRequired(DateTime.Parse("11:00PM")));
+        }
+
     }
 }
