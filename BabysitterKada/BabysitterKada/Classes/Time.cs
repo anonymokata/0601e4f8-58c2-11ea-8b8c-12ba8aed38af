@@ -19,5 +19,10 @@ namespace BabysitterKada.Classes
         {
             return date.Date + time.TimeOfDay;
         }
+
+        public static DateTime parseStringToDateTimeAndAddDayIfAM(string time)
+        {
+            return AddDayIfTimeIsAM(DateTime.Parse(time));
+        }
     }
 }

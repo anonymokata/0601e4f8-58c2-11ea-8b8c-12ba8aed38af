@@ -6,7 +6,7 @@ namespace BabysitterKada.Classes
 {
     public class FamilyB : Family
     {
-        public FamilyB(DateTime earlyRateEndsAt, DateTime middleRateEndsAt) : base(12, 8, 16, earlyRateEndsAt, middleRateEndsAt)
+      public FamilyB() : base(10, 12, 16, "10:00PM", "12:00PM")
         {
 
         }

@@ -16,9 +16,8 @@ namespace BabysitterKada.Classes
             InputTimeExceptions.throwExceptionIfInputIsInvalidTimeStringFormat(startTime);
             InputTimeExceptions.throwExceptionIfInputIsInvalidTimeStringFormat(endTime);
 
-            this.startTime = DateTime.Parse(startTime);
-            this.endTime = DateTime.Parse(endTime);
-            this.endTime = Time.AddDayIfTimeIsAM(this.endTime);
+            this.startTime = Time.parseStringToDateTimeAndAddDayIfAM(startTime);
+            this.endTime = Time.parseStringToDateTimeAndAddDayIfAM(endTime);
 
             InputTimeExceptions exceptions = new InputTimeExceptions(this.startTime, this.endTime);
             exceptions.validate();

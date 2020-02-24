@@ -6,7 +6,7 @@ namespace BabysitterKada.Classes
 {
     public class FamilyA : Family
     {
-        public FamilyA() : base(15, 20, DateTime.Parse("11:00PM"))
+        public FamilyA() : base(15, 20, "11:00PM")
         {
 
         }
