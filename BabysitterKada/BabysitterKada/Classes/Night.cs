@@ -12,6 +12,9 @@ namespace BabysitterKada.Classes
 
         public Night(DateTime startTime, DateTime endTime)
         {
+            InputTimeExceptions exceptions = new InputTimeExceptions(startTime, endTime);
+            exceptions.validate();
+
             this.startTime = startTime;
             this.endTime = endTime;
         }
