@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using System.Text.RegularExpressions;
 
 namespace BabysitterKada.Classes
 {
@@ -11,13 +10,16 @@ namespace BabysitterKada.Classes
         private DateTime endTime;
 
         private DateTime EARLIEST_START_TIME_ALLOWED = DateTime.Parse("5:00PM");
-        private DateTime LATEST_END_TIME_ALLOWED = DateTime.Parse("5:00AM").AddDays(1);
+        private DateTime LATEST_END_TIME_ALLOWED = DateTime.Parse("5:00AM");
 
         public InputTimeExceptions (DateTime startTime, DateTime endTime)
         {
             this.startTime = startTime;
             this.endTime = endTime;
-        }
+
+            EARLIEST_START_TIME_ALLOWED = startTime.Date + EARLIEST_START_TIME_ALLOWED.TimeOfDay;
+            LATEST_END_TIME_ALLOWED = startTime.Date.AddDays(1) + LATEST_END_TIME_ALLOWED.TimeOfDay;
+    }
         public void validate()
         {
             throwExceptionIfStartTimeBeforeAllowedTime();

@@ -24,7 +24,7 @@ namespace BabysitterKadaTests
         {
             DateTime tommorowMorning = DateTime.Parse("5:00AM");
             DateTime addedDay = Time.AddDayIfTimeIsAM(tommorowMorning);
-            Assert.AreEqual(tommorowMorning.Day + 1, addedDay.Day );
+            Assert.AreEqual(tommorowMorning.Day + 1, addedDay.Day);
         }
 
         [TestMethod]
@@ -34,6 +34,6 @@ namespace BabysitterKadaTests
             DateTime addedDay = Time.AddDayIfTimeIsAM(today);
             Assert.AreEqual(today.Day, addedDay.Day);
         }
-
     }
+
 }

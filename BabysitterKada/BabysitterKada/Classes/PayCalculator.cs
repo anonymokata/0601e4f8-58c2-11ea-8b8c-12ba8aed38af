@@ -8,6 +8,7 @@ namespace BabysitterKada.Classes
     {
         private Family Family;
         private Night Night;
+
         public PayCalculator(Family family, Night night)
         {
             this.Family = family;

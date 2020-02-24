@@ -14,24 +14,24 @@ namespace BabysitterKada.Classes
         public DateTime middleRateEndsAt { get; }
         public DateTime lateRateBeginsAt { get; }
 
-        public Family(double earlyRate, double lateRate, string earlyRateEndsAt)
+        public Family(double earlyRate, double lateRate, DateTime earlyRateEndsAt)
         {
             this.earlyRate = earlyRate;
             this.lateRate = lateRate;
 
-            this.earlyRateEndsAt = Time.AddDayIfTimeIsAM(DateTime.Parse(earlyRateEndsAt));
-            this.lateRateBeginsAt = this.earlyRateEndsAt;
+            this.earlyRateEndsAt = earlyRateEndsAt;
+            lateRateBeginsAt = earlyRateEndsAt;
         }
 
-        public Family(double earlyRate, double middleRate, double lateRate, string earlyRateEndsAt, string middleRateEndsAt)
+        public Family(double earlyRate, double middleRate, double lateRate, DateTime earlyRateEndsAt, DateTime middleRateEndsAt)
         {
             this.earlyRate = earlyRate;
             this.lateRate = lateRate;
             this.middleRate = middleRate;
 
-            this.earlyRateEndsAt = Time.AddDayIfTimeIsAM(DateTime.Parse(earlyRateEndsAt));
-            this.middleRateEndsAt = Time.AddDayIfTimeIsAM(DateTime.Parse(middleRateEndsAt));
-            this.lateRateBeginsAt = this.middleRateEndsAt;
+            this.earlyRateEndsAt = earlyRateEndsAt;
+            this.middleRateEndsAt = middleRateEndsAt;
+            lateRateBeginsAt = middleRateEndsAt;
         }
     }
 }

@@ -12,7 +12,7 @@ namespace BabysitterKadaTests
         Night endAtElevenPM = new Night(DateTime.Parse("5:00PM"), DateTime.Parse("11:00PM"));
         Night endAtTwoAM = new Night(DateTime.Parse("5:00PM"), DateTime.Parse("2:00AM").AddDays(1));
         Night endAtEightPM = new Night(DateTime.Parse("5:00PM"), DateTime.Parse("8:00PM"));
-        Family family = new Family(12, 8, 16, "10:00PM", "12:00AM");
+        Family family = new Family(12, 8, 16, DateTime.Parse("10:00PM"), DateTime.Parse("12:00AM").AddDays(1));
 
         [TestMethod]
         public void whenGetEarlyHoursIsGivenEndTimeAfterEarlyCutoffItIgnoresHoursAfterCutoff()
@@ -70,7 +70,7 @@ namespace BabysitterKadaTests
         [TestMethod]
         public void whenCalculatePayIsCalledForJustEarlyRateItReturnsCorrectDolars()
         {
-            Family family = new Family(12, 8, 16, "10:00PM", "12:00AM");
+            Family family = new Family(12, 8, 16, DateTime.Parse("10:00PM"), DateTime.Parse("12:00AM").AddDays(1));
             PayCalculator calculator = new PayCalculator(family, endAtEightPM);
             Assert.AreEqual(36.0, calculator.CalculatePay());
         }
@@ -78,7 +78,7 @@ namespace BabysitterKadaTests
         [TestMethod]
         public void whenCalculatePayIsCalledForEarlyAndMiddleRateItReturnsCorrectDollars()
         {
-            Family family = new Family(12, 8, 16, "10:00PM", "12:00AM");
+            Family family = new Family(12, 8, 16, DateTime.Parse("10:00PM"), DateTime.Parse("12:00AM").AddDays(1));
             Night night = new Night(DateTime.Parse("8:00PM"), DateTime.Parse("11:00PM"));
             PayCalculator calculator = new PayCalculator(family, night);
             Assert.AreEqual(32.0, calculator.CalculatePay());
@@ -88,7 +88,7 @@ namespace BabysitterKadaTests
         [TestMethod]
         public void whenCalculatePayIsCalledForEarlyAndMiddleAndLateRateItReturnsCorrectDollars()
         {
-            Family family = new Family(12, 8, 16, "10:00PM", "12:00AM");
+            Family family = new Family(12, 8, 16, DateTime.Parse("10:00PM"), DateTime.Parse("12:00AM").AddDays(1));
             Night night = new Night(DateTime.Parse("8:00PM"), DateTime.Parse("2:00AM").AddDays(1));
             PayCalculator calculator = new PayCalculator(family, night);
             Assert.AreEqual(72.0, calculator.CalculatePay());
@@ -98,7 +98,7 @@ namespace BabysitterKadaTests
         [TestMethod]
         public void whenCalculatePayIsCalledForFamilyWithNoMiddleRateReturnsCorrectDollars()
         {
-            Family family = new Family(15, 20, "11:00PM");
+            Family family = new Family(15, 20, DateTime.Parse("11:00PM"));
             Night night = new Night(DateTime.Parse("9:00PM"), DateTime.Parse("1:00AM").AddDays(1));
             PayCalculator calculator = new PayCalculator(family, night);
             Assert.AreEqual(70.0, calculator.CalculatePay());
