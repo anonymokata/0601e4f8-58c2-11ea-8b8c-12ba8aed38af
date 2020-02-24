@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace BabysitterKada.Classes
 {
@@ -10,13 +11,17 @@ namespace BabysitterKada.Classes
         public DateTime endTime { get; }
 
 
-        public Night(DateTime startTime, DateTime endTime)
+        public Night(string startTime, string endTime)
         {
-            InputTimeExceptions exceptions = new InputTimeExceptions(startTime, endTime);
-            exceptions.validate();
+            InputTimeExceptions.throwExceptionIfInputIsInvalidTimeStringFormat(startTime);
+            InputTimeExceptions.throwExceptionIfInputIsInvalidTimeStringFormat(endTime);
 
-            this.startTime = startTime;
-            this.endTime = endTime;
+            this.startTime = DateTime.Parse(startTime);
+            this.endTime = DateTime.Parse(endTime);
+            this.endTime = Time.AddDayIfTimeIsAM(this.endTime);
+
+            InputTimeExceptions exceptions = new InputTimeExceptions(this.startTime, this.endTime);
+            exceptions.validate();
         }
     }
 }

@@ -4,9 +4,9 @@ using System.Text;
 
 namespace BabysitterKada.Classes
 {
-    public class FamilyA : Family
+    public class FamilyC : Family
     {
-        public FamilyA() : base(15, 20, DateTime.Parse("11:00PM"))
+        public FamilyC(DateTime earlyRateEndsAt) : base(21, 15, earlyRateEndsAt)
         {
 
         }

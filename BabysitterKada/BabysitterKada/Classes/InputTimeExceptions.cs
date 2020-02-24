@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Text.RegularExpressions;
 
 namespace BabysitterKada.Classes
 {
@@ -10,25 +11,18 @@ namespace BabysitterKada.Classes
         private DateTime endTime;
 
         private DateTime EARLIEST_START_TIME_ALLOWED = DateTime.Parse("5:00PM");
-        private DateTime LATEST_END_TIME_ALLOWED = DateTime.Parse("5:00AM");
+        private DateTime LATEST_END_TIME_ALLOWED = DateTime.Parse("5:00AM").AddDays(1);
 
         public InputTimeExceptions (DateTime startTime, DateTime endTime)
         {
             this.startTime = startTime;
             this.endTime = endTime;
-            combineTimeAndDateFromTwoDifferentDateTimesForEarliestAndLatestTimeAllowed();
-    }
+        }
         public void validate()
         {
             throwExceptionIfStartTimeBeforeAllowedTime();
             throwExceptionIfEndTimeAfterAllowedTime();
             throwExceptionIfEndTimeBeforeStartTime();
-        }
-
-        private void combineTimeAndDateFromTwoDifferentDateTimesForEarliestAndLatestTimeAllowed ()
-        {
-            EARLIEST_START_TIME_ALLOWED = startTime.Date + EARLIEST_START_TIME_ALLOWED.TimeOfDay;
-            LATEST_END_TIME_ALLOWED = startTime.Date.AddDays(1) + LATEST_END_TIME_ALLOWED.TimeOfDay;
         }
 
         private void throwExceptionIfStartTimeBeforeAllowedTime()
@@ -52,6 +46,15 @@ namespace BabysitterKada.Classes
             if (endTime < startTime)
             {
                 throw new ArgumentException("End time is not allowed to be before start time.");
+            }
+        }
+        public static void throwExceptionIfInputIsInvalidTimeStringFormat(string time)
+        {
+            Regex regex = new Regex(@"\d{1,2}:\d\d(\s){0,1}((AM|PM)|(am|pm))");
+            Match match = regex.Match(time);
+            if (!match.Success)
+            {
+                throw new ArgumentException("Invalid time format. Please use hh:mm:am.  Ex: 6:30AM, 12:10PM");
             }
         }
     }

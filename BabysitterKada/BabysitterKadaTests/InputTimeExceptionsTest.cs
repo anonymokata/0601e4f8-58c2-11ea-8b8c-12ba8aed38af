@@ -65,7 +65,7 @@ namespace BabysitterKadaTests
             try
             {
                 exceptions.validate();
-                Assert.Fail("Should thrown an exception");
+                Assert.Fail("Should throw an exception");
             }
             catch (Exception ex)
             {
@@ -85,6 +85,22 @@ namespace BabysitterKadaTests
             catch (Exception ex)
             {
                 Assert.AreEqual("End time is not allowed to be before start time.", ex.Message);
+            }
+        }
+
+
+        [TestMethod]
+        public void whenthrowExceptionIfInputIsInvalidTimeStringFormatReceivesInvalidFormatAnExceptionIsThrown()
+        {
+            try
+            {
+                InputTimeExceptions.throwExceptionIfInputIsInvalidTimeStringFormat("abc");
+                InputTimeExceptions.throwExceptionIfInputIsInvalidTimeStringFormat("13:00:00");
+                Assert.Fail("Should thrown an exception");
+            }
+            catch (Exception ex)
+            {
+                Assert.AreEqual("Invalid time format. Please use hh:mm:am.  Ex: 6:30AM, 12:10PM", ex.Message);
             }
         }
     }
