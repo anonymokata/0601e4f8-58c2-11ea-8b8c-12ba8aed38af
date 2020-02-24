@@ -34,29 +34,53 @@ namespace BabysitterKada.Classes
         private double getHoursWorkedWithinATimeRange(DateTime windowStart, DateTime windowEnd)
         {
             double hoursWorked;
-            if (night.startTime >= windowEnd || night.endTime <= windowStart)
+            if (noHoursWorkedInThisWindow(windowStart, windowEnd))
             {
                 hoursWorked = 0;
             }
-            else if (night.startTime < windowStart && night.endTime < windowEnd)
+            else if (startIsBeforeWindowAndEndFallsInWindow(windowStart, windowEnd))
             {
                 hoursWorked = Math.Floor(hoursBetween(windowStart, night.endTime));
             }
-            else if (night.startTime >= windowStart && night.endTime <= windowEnd)
+            else if (startIsInWindowAndEndIsToo(windowStart, windowEnd))
             {
                 hoursWorked = Math.Floor(hoursBetween(night.startTime, night.endTime));
             }
-            else if (night.startTime > windowStart && night.endTime >= windowEnd)
+            else if (startIsInWindowButEndIsOutOfWindow(windowStart, windowEnd))
             {
                 hoursWorked = Math.Floor(hoursBetween(night.startTime, windowEnd));
             }
             else
             {
-                hoursWorked = hoursBetween(windowStart, windowEnd);
+                hoursWorked = fullHoursInWindow(windowStart, windowEnd);
             }
             return hoursWorked;
         }
 
+        private Boolean noHoursWorkedInThisWindow(DateTime windowStart, DateTime windowEnd)
+        {
+            return night.startTime >= windowEnd || night.endTime <= windowStart;
+        }
+
+        private Boolean startIsBeforeWindowAndEndFallsInWindow(DateTime windowStart, DateTime windowEnd)
+        {
+            return night.startTime < windowStart && night.endTime < windowEnd;
+        }
+
+        private Boolean startIsInWindowAndEndIsToo(DateTime windowStart, DateTime windowEnd)
+        {
+            return night.startTime >= windowStart && night.endTime <= windowEnd;
+        }
+
+        private Boolean startIsInWindowButEndIsOutOfWindow(DateTime windowStart, DateTime windowEnd)
+        {
+            return night.startTime > windowStart && night.endTime >= windowEnd;
+        }
+
+        private double fullHoursInWindow(DateTime windowStart, DateTime windowEnd)
+        {
+            return hoursBetween(windowStart, windowEnd);
+        }
 
         private double hoursBetween(DateTime startTime, DateTime endTime)
         {
