@@ -120,9 +120,27 @@ namespace BabysitterKadaTests
         [TestMethod]
         public void whenCalculatePayHasFractionalLateHoursItPaysOnlyWholeHours()
         {
-            Night endAtElevenThirtyPM = new Night("9:00PM", "2:37AM");
-            PayCalculator calculator = new PayCalculator(family, endAtElevenThirtyPM);
+            Night endAtFraction = new Night("9:00PM", "2:37AM");
+            PayCalculator calculator = new PayCalculator(family, endAtFraction);
             Assert.AreEqual(60.0, calculator.CalculatePay());
+        }
+
+
+        [TestMethod]
+        public void whenNightStartsAfterEarlyHoursCalculatesCorrectPay()
+        {
+            Night noEarlyHours = new Night("11:00PM", "1:00AM");
+            PayCalculator calculator = new PayCalculator(family, noEarlyHours);
+            Assert.AreEqual(24.0, calculator.CalculatePay());
+        }
+
+
+        [TestMethod]
+        public void whenNightHasOnlyLateHoursCalculatesCorrectPay()
+        {
+            Night allLateHours = new Night("12:00AM", "3:00AM");
+            PayCalculator calculator = new PayCalculator(family, allLateHours);
+            Assert.AreEqual(48.0, calculator.CalculatePay());
         }
     }
 }

@@ -10,8 +10,8 @@ namespace BabysitterKada.Classes
         private DateTime startTime;
         private DateTime endTime;
 
-        private DateTime EARLIEST_START_TIME_ALLOWED = DateTime.Parse("5:00PM");
-        private DateTime LATEST_END_TIME_ALLOWED = DateTime.Parse("5:00AM").AddDays(1);
+        public DateTime EARLIEST_START_TIME_ALLOWED = DateTime.Parse("5:00PM");
+        public DateTime LATEST_END_TIME_ALLOWED = DateTime.Parse("5:00AM").AddDays(1);
 
         public InputTimeExceptions (DateTime startTime, DateTime endTime)
         {

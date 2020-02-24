@@ -21,8 +21,6 @@ namespace BabysitterKada
             Family familyC = new FamilyC();
             PayCalculator calcC = new PayCalculator(familyC, night3);
             Console.WriteLine(calcC.CalculatePay());
-
-
         }
     }
 }

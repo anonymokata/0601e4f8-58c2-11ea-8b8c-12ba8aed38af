@@ -10,7 +10,6 @@ namespace BabysitterKada.Classes
         public DateTime startTime { get; }
         public DateTime endTime { get; }
 
-
         public Night(string startTime, string endTime)
         {
             InputTimeExceptions.throwExceptionIfInputIsInvalidTimeStringFormat(startTime);
