@@ -16,15 +16,19 @@ namespace BabysitterKada.Classes
         {
             this.startTime = startTime;
             this.endTime = endTime;
-
-            EARLIEST_START_TIME_ALLOWED = startTime.Date + EARLIEST_START_TIME_ALLOWED.TimeOfDay;
-            LATEST_END_TIME_ALLOWED = startTime.Date.AddDays(1) + LATEST_END_TIME_ALLOWED.TimeOfDay;
+            combineTimeAndDateFromTwoDifferentDateTimesForEarliestAndLatestTime();
     }
         public void validate()
         {
             throwExceptionIfStartTimeBeforeAllowedTime();
             throwExceptionIfEndTimeAfterAllowedTime();
             throwExceptionIfEndTimeBeforeStartTime();
+        }
+
+        private void combineTimeAndDateFromTwoDifferentDateTimesForEarliestAndLatestTime ()
+        {
+            EARLIEST_START_TIME_ALLOWED = startTime.Date + EARLIEST_START_TIME_ALLOWED.TimeOfDay;
+            LATEST_END_TIME_ALLOWED = startTime.Date.AddDays(1) + LATEST_END_TIME_ALLOWED.TimeOfDay;
         }
 
         private void throwExceptionIfStartTimeBeforeAllowedTime()

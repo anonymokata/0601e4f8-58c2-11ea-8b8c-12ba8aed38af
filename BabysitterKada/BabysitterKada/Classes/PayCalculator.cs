@@ -6,78 +6,74 @@ namespace BabysitterKada.Classes
 {
     public class PayCalculator
     {
-        private Family Family;
-        private Night Night;
+        private Family family;
+        private Night night;
 
         public PayCalculator(Family family, Night night)
         {
-            this.Family = family;
-            this.Night = night;
+            this.family = family;
+            this.night = night;
         }
 
         public double CalculatePay()
         {
-            double earlyRatePay = getEarlyHours() * Family.earlyRate;
-            double midRatePay = getMiddleHours() * Family.middleRate;
-            double lateRatePay = getLateHours() * Family.lateRate;
+            double earlyRatePay = getEarlyHours() * family.earlyRate;
+            double midRatePay = getMiddleHours() * family.middleRate;
+            double lateRatePay = getLateHours() * family.lateRate;
             return earlyRatePay + midRatePay + lateRatePay;
         }
-
 
         public double getEarlyHours()
         {
             double hoursWorked = 0;
-            if (workedPastNextRateBeginTime(Family.earlyRateEndsAt))
+            if (workedPastNextRateBeginTime(family.earlyRateEndsAt))
             {
-                hoursWorked = fromStartTo(Family.earlyRateEndsAt);
+                hoursWorked = hoursBetween(night.startTime, family.earlyRateEndsAt);
             }
             else
             {
-                hoursWorked = fromStartTo(Night.endTime);
+                hoursWorked = hoursBetween(night.startTime, night.endTime);
             }
             return hoursWorked;
         }
 
-        private Boolean workedPastNextRateBeginTime (DateTime nextRateBeginTime)
+        public static double hoursBetween(DateTime startTime, DateTime endTime)
         {
-            return Night.endTime >= nextRateBeginTime;
+            TimeSpan duration = endTime - startTime;
+
+            return duration.TotalHours;
         }
 
-        private double fromStartTo(DateTime endTime)
+        private Boolean workedPastNextRateBeginTime (DateTime nextRateBeginTime)
         {
-            return Time.GetTimeDifference(Night.startTime, endTime);
+            return night.endTime >= nextRateBeginTime;
         }
 
         public double getMiddleHours()
         {
             double midRateHoursWorked = 0;
-            if (workedPastNextRateBeginTime(Family.earlyRateEndsAt) && didNotWorkLate())
+            if (workedPastNextRateBeginTime(family.earlyRateEndsAt) && didNotWorkLate())
             {
-                midRateHoursWorked = fromEarlyRateEndTo(Night.endTime);
+                midRateHoursWorked = hoursBetween(family.earlyRateEndsAt, night.endTime);
             }
-            else if (workedPastNextRateBeginTime(Family.lateRateBeginsAt))
+            else if (workedPastNextRateBeginTime(family.lateRateBeginsAt))
             {
-                midRateHoursWorked = fromEarlyRateEndTo(Family.lateRateBeginsAt);
+                midRateHoursWorked = hoursBetween(family.earlyRateEndsAt, family.lateRateBeginsAt);
             }
             return midRateHoursWorked;
         }
 
         private Boolean didNotWorkLate()
         {
-            return Night.endTime <= Family.lateRateBeginsAt;
-        }
-
-        private double fromEarlyRateEndTo(DateTime endTime)
-        {
-            return Time.GetTimeDifference(Family.earlyRateEndsAt, endTime);
+            return night.endTime <= family.lateRateBeginsAt;
         }
 
         public double getLateHours()
         {
             double lateRateHoursWorked = 0;
-            if (workedPastNextRateBeginTime(Family.lateRateBeginsAt))
+            if (workedPastNextRateBeginTime(family.lateRateBeginsAt))
             {
-                lateRateHoursWorked = Time.GetTimeDifference(Family.lateRateBeginsAt, Night.endTime);
+                lateRateHoursWorked = hoursBetween(family.lateRateBeginsAt, night.endTime);
             }
             return lateRateHoursWorked;
         }
