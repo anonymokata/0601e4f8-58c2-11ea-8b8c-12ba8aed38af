@@ -54,7 +54,7 @@ namespace BabysitterKada.Classes
             double midRateHoursWorked = 0;
             if (workedPastNextRateBeginTime(family.earlyRateEndsAt) && didNotWorkLate())
             {
-                midRateHoursWorked = hoursBetween(family.earlyRateEndsAt, night.endTime);
+                midRateHoursWorked = Math.Floor(hoursBetween(family.earlyRateEndsAt, night.endTime));
             }
             else if (workedPastNextRateBeginTime(family.lateRateBeginsAt))
             {
