@@ -58,28 +58,6 @@ namespace BabysitterKada.Classes
         }
 
 
-
-        /*public double getEarlyHours()
-        {
-            double hoursWorked = 0;
-            if (nightStartedAfter(family.earlyRateEndsAt)) {
-                return hoursWorked;
-            }
-            else if (nightEndedBefore(family.earlyRateEndsAt))
-            {
-                hoursWorked = Math.Floor(hoursBetween(night.startTime, night.endTime));
-            }
-            else if (workedPast(family.earlyRateEndsAt) && nightStartedBefore(family.earlyRateEndsAt))
-            {
-                hoursWorked = Math.Floor(hoursBetween(night.startTime, family.earlyRateEndsAt));
-            }
-            else if (workedPast(family.earlyRateEndsAt))
-            {
-                hoursWorked = hoursBetween(night.startTime, family.earlyRateEndsAt);
-            }
-            return hoursWorked;
-        }*/
-
         private double hoursBetween(DateTime startTime, DateTime endTime)
         {
             TimeSpan duration = endTime - startTime;
@@ -87,59 +65,10 @@ namespace BabysitterKada.Classes
             return duration.TotalHours;
         }
 
-        private Boolean workedPast (DateTime nextRateBeginTime)
-        {
-            return night.endTime >= nextRateBeginTime;
-        }
-
-        private Boolean nightEndedBefore (DateTime nextRateBeginTime)
-        {
-            return night.endTime <= nextRateBeginTime;
-        }
-
-        private Boolean nightStartedBefore(DateTime nextRateBeginTime)
-        {
-            return night.startTime < nextRateBeginTime;
-        }
-
-        private Boolean nightStartedAfter(DateTime nextRateBeginTime)
-        {
-            return night.startTime >= family.earlyRateEndsAt;
-        }
-
-       /* public double getMiddleHours()
-        {
-            double midRateHoursWorked = 0;
-            if (workedPast(family.earlyRateEndsAt) && didNotWorkLate())
-            {
-                midRateHoursWorked = Math.Floor(hoursBetween(family.earlyRateEndsAt, night.endTime));
-            }
-            else if (workedPast(family.lateRateBeginsAt))
-            {
-                midRateHoursWorked = hoursBetween(family.earlyRateEndsAt, family.lateRateBeginsAt);
-            }
-            return midRateHoursWorked;
-        } */
-
         public double getMiddleHours()
         {
             return getHoursWorkedWithinATimeRange(family.earlyRateEndsAt, family.middleRateEndsAt);
         }
-
-        private Boolean didNotWorkLate()
-        {
-            return night.endTime <= family.lateRateBeginsAt;
-        }
-
-       /* public double getLateHours()
-        {
-            double lateRateHoursWorked = 0;
-            if (workedPast(family.lateRateBeginsAt))
-            {
-                lateRateHoursWorked = Math.Floor(hoursBetween(family.lateRateBeginsAt, night.endTime));
-            }
-            return lateRateHoursWorked;
-        } */
 
         public double getLateHours()
         {
