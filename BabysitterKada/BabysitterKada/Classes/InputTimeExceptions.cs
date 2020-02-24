@@ -16,7 +16,7 @@ namespace BabysitterKada.Classes
         {
             this.startTime = startTime;
             this.endTime = endTime;
-            combineTimeAndDateFromTwoDifferentDateTimesForEarliestAndLatestTime();
+            combineTimeAndDateFromTwoDifferentDateTimesForEarliestAndLatestTimeAllowed();
     }
         public void validate()
         {
@@ -25,7 +25,7 @@ namespace BabysitterKada.Classes
             throwExceptionIfEndTimeBeforeStartTime();
         }
 
-        private void combineTimeAndDateFromTwoDifferentDateTimesForEarliestAndLatestTime ()
+        private void combineTimeAndDateFromTwoDifferentDateTimesForEarliestAndLatestTimeAllowed ()
         {
             EARLIEST_START_TIME_ALLOWED = startTime.Date + EARLIEST_START_TIME_ALLOWED.TimeOfDay;
             LATEST_END_TIME_ALLOWED = startTime.Date.AddDays(1) + LATEST_END_TIME_ALLOWED.TimeOfDay;

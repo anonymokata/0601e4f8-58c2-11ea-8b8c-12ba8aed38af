@@ -32,7 +32,7 @@ namespace BabysitterKada.Classes
             }
             else
             {
-                hoursWorked = hoursBetween(night.startTime, night.endTime);
+                hoursWorked = Math.Floor(hoursBetween(night.startTime, night.endTime));
             }
             return hoursWorked;
         }
