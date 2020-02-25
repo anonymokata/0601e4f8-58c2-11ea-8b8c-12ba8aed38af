@@ -5,21 +5,27 @@ using System.Text.RegularExpressions;
 
 namespace BabysitterKada.Classes
 {
-    public class InputTimeExceptions
+    public class InputTimeExceptions : Night
     {
-        private DateTime startTime;
-        private DateTime endTime;
+        public string StartTimeAsString { get; }
+        public string EndTimeAsString { get; }
 
-        public DateTime EARLIEST_START_TIME_ALLOWED = DateTime.Parse("5:00PM");
-        public DateTime LATEST_END_TIME_ALLOWED = DateTime.Parse("5:00AM").AddDays(1);
+        public DateTime StartTimeAsDateTime { get; }
+        public DateTime EndTimeAsDateTime { get; }
 
-        public InputTimeExceptions (DateTime startTime, DateTime endTime)
+        public InputTimeExceptions(string startTime, string endTime) : base(startTime, endTime)
         {
-            this.startTime = startTime;
-            this.endTime = endTime;
+            StartTimeAsString = startTime;
+            EndTimeAsString = endTime;
+
+            StartTimeAsDateTime = Time.parseStringToDateTimeAndAddDayIfAM(startTime);
+            EndTimeAsDateTime = Time.parseStringToDateTimeAndAddDayIfAM(endTime);
         }
+
         public void validate()
         {
+            throwExceptionIfInputIsInvalidTimeStringFormat(StartTimeAsString);
+            throwExceptionIfInputIsInvalidTimeStringFormat(EndTimeAsString);
             throwExceptionIfStartTimeBeforeAllowedTime();
             throwExceptionIfEndTimeAfterAllowedTime();
             throwExceptionIfEndTimeBeforeStartTime();
@@ -27,7 +33,7 @@ namespace BabysitterKada.Classes
 
         private void throwExceptionIfStartTimeBeforeAllowedTime()
         {
-            if (startTime < EARLIEST_START_TIME_ALLOWED)
+            if (StartTimeAsDateTime < EARLIEST_START_TIME_ALLOWED)
             {
                 throw new ArgumentException("Invalid start time. A start time must be after 5:00PM");
             }
@@ -35,7 +41,7 @@ namespace BabysitterKada.Classes
 
         private void throwExceptionIfEndTimeAfterAllowedTime()
         {
-            if (endTime > LATEST_END_TIME_ALLOWED)
+            if (EndTimeAsDateTime > LATEST_END_TIME_ALLOWED)
             {
                 throw new ArgumentException("Invalid end time. An end time must be before 5:00AM");
             }
@@ -43,7 +49,7 @@ namespace BabysitterKada.Classes
 
         private void throwExceptionIfEndTimeBeforeStartTime()
         {
-            if (endTime < startTime)
+            if (EndTimeAsDateTime < StartTimeAsDateTime)
             {
                 throw new ArgumentException("End time is not allowed to be before start time.");
             }

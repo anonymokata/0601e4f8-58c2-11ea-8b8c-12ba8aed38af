@@ -36,7 +36,7 @@ namespace BabysitterKada.Classes
 
             this.earlyRateEndsAt = Time.parseStringToDateTimeAndAddDayIfAM(earlyRateEndsAt);
             this.middleRateEndsAt = Time.parseStringToDateTimeAndAddDayIfAM(middleRateEndsAt);
-            lateRateBeginsAt = Time.parseStringToDateTimeAndAddDayIfAM(middleRateEndsAt);
+            lateRateBeginsAt = this.middleRateEndsAt;
         }
     }
 }

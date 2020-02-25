@@ -6,29 +6,26 @@ namespace BabysitterKada.Classes
 {
     public class PayCalculator
     {
-        private Family family;
-        private Night night;
-
-        public DateTime EARLIEST_START_TIME_ALLOWED = DateTime.Parse("5:00PM");
-        public DateTime LATEST_END_TIME_ALLOWED = DateTime.Parse("5:00AM").AddDays(1);
+        private Family Family;
+        private Night Night;
 
         public PayCalculator(Family family, Night night)
         {
-            this.family = family;
-            this.night = night;
+            this.Family = family;
+            this.Night = night;
         }
 
         public double CalculatePay()
         {
-            double earlyRatePay = getEarlyHours() * family.earlyRate;
-            double midRatePay = getMiddleHours() * family.middleRate;
-            double lateRatePay = getLateHours() * family.lateRate;
+            double earlyRatePay = getEarlyHours() * Family.earlyRate;
+            double midRatePay = getMiddleHours() * Family.middleRate;
+            double lateRatePay = getLateHours() * Family.lateRate;
             return earlyRatePay + midRatePay + lateRatePay;
         }
 
         public double getEarlyHours()
         {
-            return getHoursWorkedWithinATimeRange(EARLIEST_START_TIME_ALLOWED, family.earlyRateEndsAt);
+            return getHoursWorkedWithinATimeRange(Night.EARLIEST_START_TIME_ALLOWED, Family.earlyRateEndsAt);
         }
 
         private double getHoursWorkedWithinATimeRange(DateTime windowStart, DateTime windowEnd)
@@ -40,15 +37,15 @@ namespace BabysitterKada.Classes
             }
             else if (startIsBeforeWindowAndEndFallsInWindow(windowStart, windowEnd))
             {
-                hoursWorked = Math.Floor(hoursBetween(windowStart, night.endTime));
+                hoursWorked = Math.Floor(hoursBetween(windowStart, Night.EndTime));
             }
             else if (startIsInWindowAndEndIsToo(windowStart, windowEnd))
             {
-                hoursWorked = Math.Floor(hoursBetween(night.startTime, night.endTime));
+                hoursWorked = Math.Floor(hoursBetween(Night.StartTime, Night.EndTime));
             }
             else if (startIsInWindowButEndIsOutOfWindow(windowStart, windowEnd))
             {
-                hoursWorked = Math.Floor(hoursBetween(night.startTime, windowEnd));
+                hoursWorked = Math.Floor(hoursBetween(Night.StartTime, windowEnd));
             }
             else
             {
@@ -59,22 +56,22 @@ namespace BabysitterKada.Classes
 
         private Boolean noHoursWorkedInThisWindow(DateTime windowStart, DateTime windowEnd)
         {
-            return night.startTime >= windowEnd || night.endTime <= windowStart;
+            return Night.StartTime >= windowEnd || Night.EndTime <= windowStart;
         }
 
         private Boolean startIsBeforeWindowAndEndFallsInWindow(DateTime windowStart, DateTime windowEnd)
         {
-            return night.startTime < windowStart && night.endTime < windowEnd;
+            return Night.StartTime < windowStart && Night.EndTime < windowEnd;
         }
 
         private Boolean startIsInWindowAndEndIsToo(DateTime windowStart, DateTime windowEnd)
         {
-            return night.startTime >= windowStart && night.endTime <= windowEnd;
+            return Night.StartTime >= windowStart && Night.EndTime <= windowEnd;
         }
 
         private Boolean startIsInWindowButEndIsOutOfWindow(DateTime windowStart, DateTime windowEnd)
         {
-            return night.startTime > windowStart && night.endTime >= windowEnd;
+            return Night.StartTime > windowStart && Night.EndTime >= windowEnd;
         }
 
         private double fullHoursInWindow(DateTime windowStart, DateTime windowEnd)
@@ -91,12 +88,12 @@ namespace BabysitterKada.Classes
 
         public double getMiddleHours()
         {
-            return getHoursWorkedWithinATimeRange(family.earlyRateEndsAt, family.middleRateEndsAt);
+            return getHoursWorkedWithinATimeRange(Family.earlyRateEndsAt, Family.middleRateEndsAt);
         }
 
         public double getLateHours()
         {
-            return getHoursWorkedWithinATimeRange(family.lateRateBeginsAt, LATEST_END_TIME_ALLOWED);
+            return getHoursWorkedWithinATimeRange(Family.lateRateBeginsAt, Night.LATEST_END_TIME_ALLOWED);
         }
 
     }

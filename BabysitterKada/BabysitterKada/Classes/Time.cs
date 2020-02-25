@@ -15,11 +15,6 @@ namespace BabysitterKada.Classes
             return time;
         }
 
-        public static DateTime combineTimeAndDateFromTwoDifferentDateTimesAndReturnNewDateTime(DateTime date, DateTime time)
-        {
-            return date.Date + time.TimeOfDay;
-        }
-
         public static DateTime parseStringToDateTimeAndAddDayIfAM(string time)
         {
             return AddDayIfTimeIsAM(DateTime.Parse(time));

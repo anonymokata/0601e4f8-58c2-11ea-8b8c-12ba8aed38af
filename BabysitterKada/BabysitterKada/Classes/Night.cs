@@ -7,19 +7,19 @@ namespace BabysitterKada.Classes
 {
     public class Night
     {
-        public DateTime startTime { get; }
-        public DateTime endTime { get; }
+        public DateTime StartTime { get; }
+        public DateTime EndTime { get; }
+
+        public DateTime EARLIEST_START_TIME_ALLOWED { get => DateTime.Parse("5:00PM"); }
+        public DateTime LATEST_END_TIME_ALLOWED { get => DateTime.Parse("5:00AM").AddDays(1); }
 
         public Night(string startTime, string endTime)
         {
-            InputTimeExceptions.throwExceptionIfInputIsInvalidTimeStringFormat(startTime);
-            InputTimeExceptions.throwExceptionIfInputIsInvalidTimeStringFormat(endTime);
-
-            this.startTime = Time.parseStringToDateTimeAndAddDayIfAM(startTime);
-            this.endTime = Time.parseStringToDateTimeAndAddDayIfAM(endTime);
-
-            InputTimeExceptions exceptions = new InputTimeExceptions(this.startTime, this.endTime);
+            InputTimeExceptions exceptions = new InputTimeExceptions(startTime, endTime);
             exceptions.validate();
+
+            this.StartTime = Time.parseStringToDateTimeAndAddDayIfAM(startTime);
+            this.EndTime = Time.parseStringToDateTimeAndAddDayIfAM(endTime);
         }
     }
 }
