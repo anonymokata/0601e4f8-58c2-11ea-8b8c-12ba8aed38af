@@ -28,5 +28,11 @@ namespace BabysitterKadaTests
         {
             Assert.AreEqual(1, window.getHoursWorkedWithinATimeRange(DateTime.Parse("4:00PM"), DateTime.Parse("6:00PM")));
         }
+
+        [TestMethod]
+        public void whenGetHoursWorkedWithinATimeRangeHasStartAndEndInRangeReturnsCorrectHours()
+        {
+            Assert.AreEqual(1.5, window.getHoursWorkedWithinATimeRange(DateTime.Parse("6:30PM"), DateTime.Parse("8:00PM")));
+        }
     }
 }
