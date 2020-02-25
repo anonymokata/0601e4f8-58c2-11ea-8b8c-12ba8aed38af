@@ -13,15 +13,15 @@ namespace BabysitterKada.Classes
             this.unpaidFractionalHoursRemaining = Math.Round(fractionalHours, 2);
         }
 
-        public double deductUnpaidFractionalHoursRemainingFrom(double hoursWorked)
+        public double deductUnpaidFractionalHoursFrom(double hoursWorked)
         {
             if (allRemainingFractionalHoursCanBeDeductedFromThisTime(hoursWorked))
             {
-                hoursWorked = deductAllFractionalHoursRemaining(hoursWorked);
+                hoursWorked = deductAllFractionalHoursFrom(hoursWorked);
             }
             else
             {
-                hoursWorked = deductSomeFractionalHoursAndUpdateRemaining(hoursWorked);
+                hoursWorked = deductSomeFractionalHoursFromAndUpdateUnpaidHoursRemaining(hoursWorked);
             }
             return Math.Round(hoursWorked, 2);
         }
@@ -31,14 +31,14 @@ namespace BabysitterKada.Classes
             return hoursWorked >= unpaidFractionalHoursRemaining;
         }
 
-        private double deductAllFractionalHoursRemaining(double hoursWorked)
+        private double deductAllFractionalHoursFrom(double hoursWorked)
         {
             hoursWorked = hoursWorked - unpaidFractionalHoursRemaining;
             unpaidFractionalHoursRemaining -= unpaidFractionalHoursRemaining;
             return hoursWorked;
         }
 
-        private double deductSomeFractionalHoursAndUpdateRemaining(double hoursWorked)
+        private double deductSomeFractionalHoursFromAndUpdateUnpaidHoursRemaining(double hoursWorked)
         {
             unpaidFractionalHoursRemaining -= hoursWorked;
             hoursWorked -= hoursWorked;

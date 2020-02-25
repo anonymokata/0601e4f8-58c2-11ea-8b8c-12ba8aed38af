@@ -14,13 +14,13 @@ namespace BabysitterKadaTests
         [TestMethod]
         public void whenDeductUnpaidFractionalHoursRemainingCanDeductAllRemainingHoursItDoesSo()
         {
-            Assert.AreEqual(.43, u.deductUnpaidFractionalHoursRemainingFrom(1.0));
+            Assert.AreEqual(.43, u.deductUnpaidFractionalHoursFrom(1.0));
         }
 
         [TestMethod]
         public void whenDeductUnpaidFractionalHoursRemainingCanDeductSomeRemainingHoursItDoesSo()
         {
-            Assert.AreEqual(0, u.deductUnpaidFractionalHoursRemainingFrom(.50));
+            Assert.AreEqual(0, u.deductUnpaidFractionalHoursFrom(.50));
         }
     }
 }

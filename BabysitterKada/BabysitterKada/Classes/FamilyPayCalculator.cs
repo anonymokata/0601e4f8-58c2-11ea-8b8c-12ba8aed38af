@@ -6,50 +6,42 @@ namespace BabysitterKada.Classes
 {
     public class FamilyPayCalculator
     {
-        private Family Family;
-        private Night Night;
 
-        public FamilyPayCalculator(Family family, Night night)
+        public double CalculatePay(Family family, Night night)
         {
-            this.Family = family;
-            this.Night = night;
-        }
+            UnpaidTime unpaidTime = new UnpaidTime(night.FractionalHoursWorked);
 
-        public double CalculatePay()
-        {
-            UnpaidTime u = new UnpaidTime(Night.FractionalHoursWorked);
-
-            double totalLateHours = getLateHours();
-            double totalMiddleHours = getMiddleHours();
-            double totalEarlyHours = getEarlyHours();
+            double totalLateHours = getLateHours(family, night);
+            double totalMiddleHours = getMiddleHours(family, night);
+            double totalEarlyHours = getEarlyHours(family, night);
 
             //It is important the variables remain in this order, from latestHours to earliestHours.
-            double paidLateHours = u.deductUnpaidFractionalHoursRemainingFrom(totalLateHours);
-            double paidMiddleHours = u.deductUnpaidFractionalHoursRemainingFrom(totalMiddleHours);
-            double paidEarlyHours = u.deductUnpaidFractionalHoursRemainingFrom(totalEarlyHours);
+            double paidLateHours = unpaidTime.deductUnpaidFractionalHoursFrom(totalLateHours);
+            double paidMiddleHours = unpaidTime.deductUnpaidFractionalHoursFrom(totalMiddleHours);
+            double paidEarlyHours = unpaidTime.deductUnpaidFractionalHoursFrom(totalEarlyHours);
 
-            double earlyRatePay = paidEarlyHours * Family.EarlyRate;
-            double midRatePay = paidMiddleHours * Family.MiddleRate;
-            double lateRatePay = paidLateHours * Family.LateRate;
+            double earlyRatePay = paidEarlyHours * family.EarlyRate;
+            double midRatePay = paidMiddleHours *family.MiddleRate;
+            double lateRatePay = paidLateHours * family.LateRate;
             return Math.Round((earlyRatePay + midRatePay + lateRatePay), 2);
         }
 
-        public double getEarlyHours()
+        public double getEarlyHours(Family family, Night night)
         {
-            TimeWindow earlyWindow = new TimeWindow(Night.EARLIEST_START_TIME_ALLOWED, Family.EarlyRateEndsAt);
-            return earlyWindow.getHoursWorkedWithinATimeRange(Night.StartTime, Night.EndTime);
+            TimeWindow earlyWindow = new TimeWindow(night.EARLIEST_START_TIME_ALLOWED, family.EarlyRateEndsAt);
+            return earlyWindow.getHoursWorkedWithinATimeWindow(night.StartTime, night.EndTime);
         }
 
-        public double getMiddleHours()
+        public double getMiddleHours(Family family, Night night)
         {
-            TimeWindow middleWindow = new TimeWindow(Family.EarlyRateEndsAt, Family.MiddleRateEndsAt);
-            return middleWindow.getHoursWorkedWithinATimeRange(Night.StartTime, Night.EndTime);
+            TimeWindow middleWindow = new TimeWindow(family.EarlyRateEndsAt, family.MiddleRateEndsAt);
+            return middleWindow.getHoursWorkedWithinATimeWindow(night.StartTime, night.EndTime);
         }
 
-        public double getLateHours()
+        public double getLateHours(Family family, Night night)
         {
-            TimeWindow lateWindow = new TimeWindow(Family.LateRateBeginsAt, Night.LATEST_END_TIME_ALLOWED);
-            return lateWindow.getHoursWorkedWithinATimeRange(Night.StartTime, Night.EndTime);
+            TimeWindow lateWindow = new TimeWindow(family.LateRateBeginsAt, night.LATEST_END_TIME_ALLOWED);
+            return lateWindow.getHoursWorkedWithinATimeWindow(night.StartTime, night.EndTime);
         }
 
     }

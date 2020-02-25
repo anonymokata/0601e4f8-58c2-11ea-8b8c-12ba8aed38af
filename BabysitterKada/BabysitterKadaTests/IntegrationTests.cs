@@ -15,6 +15,8 @@ namespace BabysitterKadaTests
         Night nineThirtyToTwelveThirtyAM = new Night("9:30PM", "12:30AM");
         Night oneFifteenToThreeAM = new Night("1:15AM", "3:00AM");
 
+        FamilyPayCalculator calc = new FamilyPayCalculator();
+
         FamilyA familyA = new FamilyA();
         FamilyB familyB = new FamilyB();
         FamilyC familyC = new FamilyC();
@@ -22,36 +24,31 @@ namespace BabysitterKadaTests
         [TestMethod]
         public void whenFamilyAGivenSixToElevenPMreturnsSeventyFive()
         {
-            FamilyPayCalculator calc = new FamilyPayCalculator(familyA, sixToElevenPM);
-            Assert.AreEqual(75.0, calc.CalculatePay());
+            Assert.AreEqual(75.0, calc.CalculatePay(familyA, sixToElevenPM));
         }
 
         [TestMethod]
         public void whenFamilyAGivenEightToThreeAM()
         {
-            FamilyPayCalculator calc = new FamilyPayCalculator(familyA, eightToThreeAM);
-            Assert.AreEqual(125.0, calc.CalculatePay());
+            Assert.AreEqual(125.0, calc.CalculatePay(familyA, eightToThreeAM));
         }
 
         [TestMethod]
         public void whenFamilyAGivenNineThirtyToMidnight()
         {
-            FamilyPayCalculator calc = new FamilyPayCalculator(familyA, nineThirtyToMidnight);
-            Assert.AreEqual(32.50, calc.CalculatePay());
+            Assert.AreEqual(32.50, calc.CalculatePay(familyA, nineThirtyToMidnight));
         }
 
         [TestMethod]
         public void whenFamilyAGivenNineThirtyToTwelveThirtyAM()
         {
-            FamilyPayCalculator calc = new FamilyPayCalculator(familyA, nineThirtyToTwelveThirtyAM);
-            Assert.AreEqual(52.50, calc.CalculatePay());
+            Assert.AreEqual(52.50, calc.CalculatePay(familyA, nineThirtyToTwelveThirtyAM));
         }
 
         [TestMethod]
         public void whenFamilyAGivenOneFifteenToThreeAM()
         {
-            FamilyPayCalculator calc = new FamilyPayCalculator(familyA, oneFifteenToThreeAM);
-            Assert.AreEqual(20.0, calc.CalculatePay());
+            Assert.AreEqual(20.0, calc.CalculatePay(familyA, oneFifteenToThreeAM));
         }
     }
 }

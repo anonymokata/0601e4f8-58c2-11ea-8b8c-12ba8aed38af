@@ -7,20 +7,19 @@ namespace BabysitterKada
     {
         static void Main(string[] args)
         {
+            FamilyPayCalculator calc = new FamilyPayCalculator();
+
             Night night = new Night("6:00PM", "11:00PM");
             Family family = new FamilyA();
-            FamilyPayCalculator calc = new FamilyPayCalculator(family, night);
-            Console.WriteLine(calc.CalculatePay());
+            Console.WriteLine(calc.CalculatePay(family, night));
 
             Night night2 = new Night("7:00PM", "1:00AM");
             Family familyB = new FamilyB();
-            FamilyPayCalculator calcB = new FamilyPayCalculator(familyB, night2);
-            Console.WriteLine(calcB.CalculatePay());
+            Console.WriteLine(calc.CalculatePay(familyB, night2));
 
             Night night3 = new Night("7:00PM", "1:00AM");
             Family familyC = new FamilyC();
-            FamilyPayCalculator calcC = new FamilyPayCalculator(familyC, night3);
-            Console.WriteLine(calcC.CalculatePay());
+            Console.WriteLine(calc.CalculatePay(familyC, night3));
         }
     }
 }

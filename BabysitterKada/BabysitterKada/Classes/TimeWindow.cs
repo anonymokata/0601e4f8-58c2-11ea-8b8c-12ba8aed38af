@@ -14,7 +14,7 @@ namespace BabysitterKada.Classes
             this.windowEnd = windowEnd;
         }
 
-        public  double getHoursWorkedWithinATimeRange(DateTime startTime, DateTime endTime)
+        public  double getHoursWorkedWithinATimeWindow(DateTime startTime, DateTime endTime)
         {
             double hoursWorked;
             if (noHoursWorkedInThisWindow(startTime, endTime))

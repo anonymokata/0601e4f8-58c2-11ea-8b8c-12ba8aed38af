@@ -14,25 +14,25 @@ namespace BabysitterKadaTests
         [TestMethod]
         public void whenGetHoursWorkedWithinATimeRangeHasNoHoursInRangeReturnsZero()
         {
-            Assert.AreEqual(0, window.getHoursWorkedWithinATimeRange(DateTime.Parse("1:00PM"), DateTime.Parse("4:00PM")));
+            Assert.AreEqual(0, window.getHoursWorkedWithinATimeWindow(DateTime.Parse("1:00PM"), DateTime.Parse("4:00PM")));
         }
 
         [TestMethod]
         public void whenGetHoursWorkedWithinATimeRangeHasOnlyStartInRangeReturnsCorrectHours()
         {
-            Assert.AreEqual(3, window.getHoursWorkedWithinATimeRange(DateTime.Parse("9:00PM"), DateTime.Parse("12:00AM").AddDays(1)));
+            Assert.AreEqual(3, window.getHoursWorkedWithinATimeWindow(DateTime.Parse("9:00PM"), DateTime.Parse("12:00AM").AddDays(1)));
         }
 
         [TestMethod]
         public void whenGetHoursWorkedWithinATimeRangeHasOnlyEndInRangeReturnsCorrectHours()
         {
-            Assert.AreEqual(1, window.getHoursWorkedWithinATimeRange(DateTime.Parse("4:00PM"), DateTime.Parse("6:00PM")));
+            Assert.AreEqual(1, window.getHoursWorkedWithinATimeWindow(DateTime.Parse("4:00PM"), DateTime.Parse("6:00PM")));
         }
 
         [TestMethod]
         public void whenGetHoursWorkedWithinATimeRangeHasStartAndEndInRangeReturnsCorrectHours()
         {
-            Assert.AreEqual(1.5, window.getHoursWorkedWithinATimeRange(DateTime.Parse("6:30PM"), DateTime.Parse("8:00PM")));
+            Assert.AreEqual(1.5, window.getHoursWorkedWithinATimeWindow(DateTime.Parse("6:30PM"), DateTime.Parse("8:00PM")));
         }
     }
 }
