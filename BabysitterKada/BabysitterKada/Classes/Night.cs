@@ -15,11 +15,16 @@ namespace BabysitterKada.Classes
 
         public Night(string startTime, string endTime)
         {
-            InputTimeExceptions exceptions = new InputTimeExceptions(startTime, endTime);
-            exceptions.validate();
+            validateInputs(startTime, endTime);
 
             this.StartTime = Time.parseStringToDateTimeAndAddDayIfAM(startTime);
             this.EndTime = Time.parseStringToDateTimeAndAddDayIfAM(endTime);
+        }
+
+        private void validateInputs(string startTime, string endTime)
+        {
+            InputTimeExceptions exceptions = new InputTimeExceptions(startTime, endTime);
+            exceptions.validate();
         }
     }
 }

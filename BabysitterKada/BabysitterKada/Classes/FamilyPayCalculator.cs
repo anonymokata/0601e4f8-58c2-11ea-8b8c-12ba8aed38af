@@ -4,12 +4,12 @@ using System.Text;
 
 namespace BabysitterKada.Classes
 {
-    public class PayCalculator
+    public class FamilyPayCalculator
     {
         private Family Family;
         private Night Night;
 
-        public PayCalculator(Family family, Night night)
+        public FamilyPayCalculator(Family family, Night night)
         {
             this.Family = family;
             this.Night = night;
@@ -17,15 +17,15 @@ namespace BabysitterKada.Classes
 
         public double CalculatePay()
         {
-            double earlyRatePay = getEarlyHours() * Family.earlyRate;
-            double midRatePay = getMiddleHours() * Family.middleRate;
-            double lateRatePay = getLateHours() * Family.lateRate;
+            double earlyRatePay = getEarlyHours() * Family.EarlyRate;
+            double midRatePay = getMiddleHours() * Family.MiddleRate;
+            double lateRatePay = getLateHours() * Family.LateRate;
             return earlyRatePay + midRatePay + lateRatePay;
         }
 
         public double getEarlyHours()
         {
-            return getHoursWorkedWithinATimeRange(Night.EARLIEST_START_TIME_ALLOWED, Family.earlyRateEndsAt);
+            return getHoursWorkedWithinATimeRange(Night.EARLIEST_START_TIME_ALLOWED, Family.EarlyRateEndsAt);
         }
 
         private double getHoursWorkedWithinATimeRange(DateTime windowStart, DateTime windowEnd)
@@ -53,7 +53,12 @@ namespace BabysitterKada.Classes
             }
             return hoursWorked;
         }
+        private double hoursBetween(DateTime startTime, DateTime endTime)
+        {
+            TimeSpan duration = endTime - startTime;
 
+            return duration.TotalHours;
+        }
         private Boolean noHoursWorkedInThisWindow(DateTime windowStart, DateTime windowEnd)
         {
             return Night.StartTime >= windowEnd || Night.EndTime <= windowStart;
@@ -79,21 +84,14 @@ namespace BabysitterKada.Classes
             return hoursBetween(windowStart, windowEnd);
         }
 
-        private double hoursBetween(DateTime startTime, DateTime endTime)
-        {
-            TimeSpan duration = endTime - startTime;
-
-            return duration.TotalHours;
-        }
-
         public double getMiddleHours()
         {
-            return getHoursWorkedWithinATimeRange(Family.earlyRateEndsAt, Family.middleRateEndsAt);
+            return getHoursWorkedWithinATimeRange(Family.EarlyRateEndsAt, Family.MiddleRateEndsAt);
         }
 
         public double getLateHours()
         {
-            return getHoursWorkedWithinATimeRange(Family.lateRateBeginsAt, Night.LATEST_END_TIME_ALLOWED);
+            return getHoursWorkedWithinATimeRange(Family.LateRateBeginsAt, Night.LATEST_END_TIME_ALLOWED);
         }
 
     }

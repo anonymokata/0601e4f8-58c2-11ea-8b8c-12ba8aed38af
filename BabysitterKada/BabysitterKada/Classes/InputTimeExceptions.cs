@@ -5,7 +5,7 @@ using System.Text.RegularExpressions;
 
 namespace BabysitterKada.Classes
 {
-    public class InputTimeExceptions : Night
+    public class InputTimeExceptions
     {
         public string StartTimeAsString { get; }
         public string EndTimeAsString { get; }
@@ -13,7 +13,10 @@ namespace BabysitterKada.Classes
         public DateTime StartTimeAsDateTime { get; }
         public DateTime EndTimeAsDateTime { get; }
 
-        public InputTimeExceptions(string startTime, string endTime) : base(startTime, endTime)
+        public DateTime EARLIEST_START_TIME_ALLOWED = DateTime.Parse("5:00PM");
+        public DateTime LATEST_END_TIME_ALLOWED = DateTime.Parse("5:00AM").AddDays(1);
+
+        public InputTimeExceptions(string startTime, string endTime)
         {
             StartTimeAsString = startTime;
             EndTimeAsString = endTime;
