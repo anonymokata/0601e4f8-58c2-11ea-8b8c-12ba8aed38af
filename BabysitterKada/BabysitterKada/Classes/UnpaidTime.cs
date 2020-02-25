@@ -7,37 +7,38 @@ namespace BabysitterKada.Classes
     public class UnpaidTime
     {
         private double unpaidFractionalHoursRemaining;
+
         public UnpaidTime (double fractionalHours)
         {
-            unpaidFractionalHoursRemaining = fractionalHours;
+            this.unpaidFractionalHoursRemaining = Math.Round(fractionalHours, 2);
         }
 
-        public double deductFractionalHoursIfUnpaid(double hoursWorked)
+        public double deductUnpaidFractionalHoursRemainingFrom(double hoursWorked)
         {
-            if (thereAreUnpaidFractionalHours(hoursWorked))
+            if (allRemainingFractionalHoursCanBeDeductedFromThisTime(hoursWorked))
             {
-                hoursWorked = deductUnpaidFractionalHours(hoursWorked);
+                hoursWorked = deductAllFractionalHoursRemaining(hoursWorked);
             }
             else
             {
-                hoursWorked = keepFractionalHoursAsPaidAndUpdateRemainingUnpaidTime(hoursWorked);
+                hoursWorked = deductSomeFractionalHoursAndUpdateRemaining(hoursWorked);
             }
-            return hoursWorked;
+            return Math.Round(hoursWorked, 2);
         }
 
-        private Boolean thereAreUnpaidFractionalHours(double hoursWorked)
+        private Boolean allRemainingFractionalHoursCanBeDeductedFromThisTime(double hoursWorked)
         {
             return hoursWorked >= unpaidFractionalHoursRemaining;
         }
 
-        private double deductUnpaidFractionalHours(double hoursWorked)
+        private double deductAllFractionalHoursRemaining(double hoursWorked)
         {
             hoursWorked = hoursWorked - unpaidFractionalHoursRemaining;
             unpaidFractionalHoursRemaining -= unpaidFractionalHoursRemaining;
             return hoursWorked;
         }
 
-        private double keepFractionalHoursAsPaidAndUpdateRemainingUnpaidTime(double hoursWorked)
+        private double deductSomeFractionalHoursAndUpdateRemaining(double hoursWorked)
         {
             unpaidFractionalHoursRemaining -= hoursWorked;
             hoursWorked -= hoursWorked;

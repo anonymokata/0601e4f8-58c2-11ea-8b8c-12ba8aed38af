@@ -24,9 +24,9 @@ namespace BabysitterKada.Classes
             double totalEarlyHours = getEarlyHours();
 
             //It is important the variables remain in this order, from latestHours to earliestHours.
-            double paidLateHours = u.deductFractionalHoursIfUnpaid(totalLateHours);
-            double paidMiddleHours = u.deductFractionalHoursIfUnpaid(totalMiddleHours);
-            double paidEarlyHours = u.deductFractionalHoursIfUnpaid(totalEarlyHours);
+            double paidLateHours = u.deductUnpaidFractionalHoursRemainingFrom(totalLateHours);
+            double paidMiddleHours = u.deductUnpaidFractionalHoursRemainingFrom(totalMiddleHours);
+            double paidEarlyHours = u.deductUnpaidFractionalHoursRemainingFrom(totalEarlyHours);
    
             double earlyRatePay = paidEarlyHours * Family.EarlyRate;
             double midRatePay = paidMiddleHours * Family.MiddleRate;
