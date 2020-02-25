@@ -10,6 +10,9 @@ namespace BabysitterKada.Classes
         public DateTime StartTime { get; }
         public DateTime EndTime { get; }
 
+        public double TotalHoursWorked { get => calculateTotalHoursWorked(); }
+        public double FractionalHoursWorked { get => calculateFractionalHoursWorked(); }
+
         public DateTime EARLIEST_START_TIME_ALLOWED { get => DateTime.Parse("5:00PM"); }
         public DateTime LATEST_END_TIME_ALLOWED { get => DateTime.Parse("5:00AM").AddDays(1); }
 
@@ -25,6 +28,23 @@ namespace BabysitterKada.Classes
         {
             InputTimeExceptions exceptions = new InputTimeExceptions(startTime, endTime);
             exceptions.validate();
+        }
+
+        private double calculateTotalHoursWorked()
+        {
+            return hoursBetween(StartTime, EndTime);
+        }
+
+        private double calculateFractionalHoursWorked()
+        {
+            return TotalHoursWorked - Math.Floor(TotalHoursWorked);
+        }
+
+        private double hoursBetween(DateTime startTime, DateTime endTime)
+        {
+            TimeSpan duration = endTime - startTime;
+
+            return duration.TotalHours;
         }
     }
 }
