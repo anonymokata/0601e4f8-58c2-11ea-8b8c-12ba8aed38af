@@ -16,7 +16,7 @@ namespace BabysitterKada.Classes
 
         public Family(double earlyRate, double lateRate, string earlyRateEndsAt)
         {
-            InputTimeExceptions.throwExceptionIfInputIsInvalidTimeStringFormat(earlyRateEndsAt);
+            Time.throwExceptionIfInputIsInvalidTimeStringFormat(earlyRateEndsAt);
 
             this.EarlyRate = earlyRate;
             this.LateRate = lateRate;
@@ -27,8 +27,8 @@ namespace BabysitterKada.Classes
 
         public Family(double earlyRate, double middleRate, double lateRate, string earlyRateEndsAt, string middleRateEndsAt)
         {
-            InputTimeExceptions.throwExceptionIfInputIsInvalidTimeStringFormat(earlyRateEndsAt);
-            InputTimeExceptions.throwExceptionIfInputIsInvalidTimeStringFormat(middleRateEndsAt);
+            Time.throwExceptionIfInputIsInvalidTimeStringFormat(earlyRateEndsAt);
+            Time.throwExceptionIfInputIsInvalidTimeStringFormat(middleRateEndsAt);
             
             this.EarlyRate = earlyRate;
             this.LateRate = lateRate;

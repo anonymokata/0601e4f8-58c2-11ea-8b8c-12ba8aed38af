@@ -15,7 +15,7 @@ namespace BabysitterKada.Classes
             double totalMiddleHours = getMiddleHours(family, night);
             double totalEarlyHours = getEarlyHours(family, night);
 
-            //It is important the variables remain in this order, from latestHours to earliestHours.
+            //It is important the variables remain in this order, from latestHours to earliestHours. Otherwise unpaid hours may be deducted from the wrong time window.
             double paidLateHours = unpaidTime.deductUnpaidFractionalHoursFrom(totalLateHours);
             double paidMiddleHours = unpaidTime.deductUnpaidFractionalHoursFrom(totalMiddleHours);
             double paidEarlyHours = unpaidTime.deductUnpaidFractionalHoursFrom(totalEarlyHours);

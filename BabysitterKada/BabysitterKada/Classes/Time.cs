@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Text;
+using System.Text;using System.Text.RegularExpressions;
 
 namespace BabysitterKada.Classes
 {
@@ -25,6 +25,16 @@ namespace BabysitterKada.Classes
             TimeSpan duration = endTime - startTime;
 
             return duration.TotalHours;
+        }
+
+        public static void throwExceptionIfInputIsInvalidTimeStringFormat(string time)
+        {
+            Regex regex = new Regex(@"\d{1,2}:\d\d(\s){0,1}((AM|PM)|(am|pm))");
+            Match match = regex.Match(time);
+            if (!match.Success)
+            {
+                throw new ArgumentException("Invalid time format. Please use hh:mm:am.  Ex: 6:30AM, 12:10PM");
+            }
         }
     }
 }

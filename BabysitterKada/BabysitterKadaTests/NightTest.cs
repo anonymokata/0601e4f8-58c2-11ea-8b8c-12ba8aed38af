@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 namespace BabysitterKadaTests
 {
     [TestClass]
-    public class InputTimeExceptionsTest
+    public class NightTest
     {
         string threePM = "3:00PM";
         string sixPM = "6:00PM";
@@ -17,40 +17,37 @@ namespace BabysitterKadaTests
         [TestMethod]
         public void whenValidateMethodFindsAnExceptionItThrowsArgumentException()
         {
-            InputTimeExceptions exceptions = new InputTimeExceptions(threePM, sixPM);
             try
             {
-                exceptions.validate();
+                Night exceptions = new Night(threePM, sixPM);
                 Assert.Fail("Should thrown an exception");
-            } 
+            }
             catch (Exception ex)
             {
                 Assert.IsTrue(ex is ArgumentException);
-            }   
+            }
         }
 
         [TestMethod]
         public void whenValidateIsPassedAnInvalidStartTimeItThrowsAnException()
         {
-            InputTimeExceptions exceptions = new InputTimeExceptions(threePM, sixPM);
             try
             {
-                exceptions.validate();
+                Night exceptions = new Night(threePM, sixPM);
                 Assert.Fail("Should thrown an exception");
             }
             catch (Exception ex)
             {
-                Assert.AreEqual("Invalid start time. A start time must be after 5:00PM" , ex.Message);
+                Assert.AreEqual("Invalid start time. A start time must be after 5:00PM", ex.Message);
             }
         }
 
         [TestMethod]
         public void whenValidateIsPassedAValidStartTimeNoExceptionThrown()
         {
-            InputTimeExceptions exceptions = new InputTimeExceptions(sixPM, sixPM);
             try
             {
-                exceptions.validate();
+                Night exceptions = new Night(sixPM, sixPM);
             }
             catch (Exception ex)
             {
@@ -61,10 +58,9 @@ namespace BabysitterKadaTests
         [TestMethod]
         public void whenValidateIsPassedAnOutofBoundsEndTimeTimeItThrowsAnException()
         {
-            InputTimeExceptions exceptions = new InputTimeExceptions(sixPM, sixAM);
             try
             {
-                exceptions.validate();
+                Night exceptions = new Night(sixPM, sixAM);
                 Assert.Fail("Should throw an exception");
             }
             catch (Exception ex)
@@ -76,10 +72,9 @@ namespace BabysitterKadaTests
         [TestMethod]
         public void whenValidateIsPassedAnEndTimeBeforeStartTimeThrowsException()
         {
-            InputTimeExceptions exceptions = new InputTimeExceptions(sixPM, fivePM);
             try
             {
-                exceptions.validate();
+                Night exceptions = new Night(sixPM, fivePM);
                 Assert.Fail("Should thrown an exception");
             }
             catch (Exception ex)
