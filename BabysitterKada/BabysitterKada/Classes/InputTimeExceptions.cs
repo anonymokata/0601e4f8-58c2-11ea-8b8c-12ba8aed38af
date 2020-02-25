@@ -7,19 +7,22 @@ namespace BabysitterKada.Classes
 {
     public class InputTimeExceptions
     {
-        public string StartTimeAsString { get; }
-        public string EndTimeAsString { get; }
+        private string StartTimeAsString;
+        private string EndTimeAsString;
 
-        public DateTime StartTimeAsDateTime { get; }
-        public DateTime EndTimeAsDateTime { get; }
+        private DateTime StartTimeAsDateTime;
+        private DateTime EndTimeAsDateTime;
 
-        public DateTime EARLIEST_START_TIME_ALLOWED = DateTime.Parse("5:00PM");
-        public DateTime LATEST_END_TIME_ALLOWED = DateTime.Parse("5:00AM").AddDays(1);
+        private DateTime EARLIEST_START_TIME_ALLOWED = DateTime.Parse("5:00PM");
+        private DateTime LATEST_END_TIME_ALLOWED = DateTime.Parse("5:00AM").AddDays(1);
 
         public InputTimeExceptions(string startTime, string endTime)
         {
             StartTimeAsString = startTime;
             EndTimeAsString = endTime;
+
+            this.EARLIEST_START_TIME_ALLOWED = EARLIEST_START_TIME_ALLOWED;
+            this.LATEST_END_TIME_ALLOWED = LATEST_END_TIME_ALLOWED;
 
             StartTimeAsDateTime = Time.parseStringToDateTimeAndAddDayIfAM(startTime);
             EndTimeAsDateTime = Time.parseStringToDateTimeAndAddDayIfAM(endTime);

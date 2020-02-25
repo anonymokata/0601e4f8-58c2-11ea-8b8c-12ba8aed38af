@@ -9,40 +9,29 @@ namespace BabysitterKada.Classes
         private Family Family;
         private Night Night;
 
-        private double fractionalHourCounter;
-
         public FamilyPayCalculator(Family family, Night night)
         {
             this.Family = family;
             this.Night = night;
-            fractionalHourCounter = night.FractionalHoursWorked;
         }
 
         public double CalculatePay()
         {
-            double lateHours = removeFractionalHours(getLateHours());
-            double middleHours = removeFractionalHours(getMiddleHours());
-            double earlyHours = removeFractionalHours(getEarlyHours());
-   
-            double earlyRatePay = earlyHours * Family.EarlyRate;
-            double midRatePay = middleHours * Family.MiddleRate;
-            double lateRatePay = lateHours * Family.LateRate;
-            return Math.Round((earlyRatePay + midRatePay + lateRatePay), 2);
-        }
+            UnpaidTime u = new UnpaidTime(Night.FractionalHoursWorked);
 
-    private double removeFractionalHours(double hours)
-        {
-            if (hours >= fractionalHourCounter)
-            {
-                hours = hours - fractionalHourCounter;
-                fractionalHourCounter -= fractionalHourCounter;
-            }
-            else
-            {
-                fractionalHourCounter -= hours;
-                hours -= hours;
-            }
-            return hours;
+            double totalLateHours = getLateHours();
+            double totalMiddleHours = getMiddleHours();
+            double totalEarlyHours = getEarlyHours();
+
+            //It is important the variables remain in this order, from latestHours to earliestHours.
+            double paidLateHours = u.deductFractionalHoursIfUnpaid(totalLateHours);
+            double paidMiddleHours = u.deductFractionalHoursIfUnpaid(totalMiddleHours);
+            double paidEarlyHours = u.deductFractionalHoursIfUnpaid(totalEarlyHours);
+   
+            double earlyRatePay = paidEarlyHours * Family.EarlyRate;
+            double midRatePay = paidMiddleHours * Family.MiddleRate;
+            double lateRatePay = paidLateHours * Family.LateRate;
+            return Math.Round((earlyRatePay + midRatePay + lateRatePay), 2);
         }
 
     public double getEarlyHours()
@@ -75,12 +64,14 @@ namespace BabysitterKada.Classes
         }
         return hoursWorked;
     }
+
     private double hoursBetween(DateTime startTime, DateTime endTime)
     {
         TimeSpan duration = endTime - startTime;
 
         return duration.TotalHours;
     }
+
     private Boolean noHoursWorkedInThisWindow(DateTime windowStart, DateTime windowEnd)
     {
         return Night.StartTime >= windowEnd || Night.EndTime <= windowStart;

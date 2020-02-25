@@ -46,5 +46,12 @@ namespace BabysitterKadaTests
             FamilyPayCalculator calc = new FamilyPayCalculator(familyA, nineThirtyToTwelveThirtyAM);
             Assert.AreEqual(52.50, calc.CalculatePay());
         }
+
+        [TestMethod]
+        public void whenFamilyAGivenOneFifteenToThreeAM()
+        {
+            FamilyPayCalculator calc = new FamilyPayCalculator(familyA, oneFifteenToThreeAM);
+            Assert.AreEqual(20.0, calc.CalculatePay());
+        }
     }
 }

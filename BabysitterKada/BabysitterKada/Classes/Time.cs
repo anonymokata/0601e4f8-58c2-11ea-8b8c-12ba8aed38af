@@ -19,5 +19,12 @@ namespace BabysitterKada.Classes
         {
             return AddDayIfTimeIsAM(DateTime.Parse(time));
         }
+
+        public static double hoursBetween(DateTime startTime, DateTime endTime)
+        {
+            TimeSpan duration = endTime - startTime;
+
+            return duration.TotalHours;
+        }
     }
 }
