@@ -19,46 +19,46 @@ namespace BabysitterKadaTests
         public void whenGetEarlyHoursIsGivenEndTimeAfterEarlyCutoffItIgnoresHoursAfterCutoff()
         {
             Night night = new Night("5:00PM", "1:00AM");
-            Assert.AreEqual(5.0, calc.getEarlyHours(family, night));
+            Assert.AreEqual(5.0, calc.getEarlyHoursWorked(family, night));
         }
 
         [TestMethod]
         public void whenGetEarlyHoursIsGivenEndTimeBeforeEarlyCutoffItReturnsCorrectHours()
         {
-            Assert.AreEqual(3.0, calc.getEarlyHours(family, endAtEightPM));
+            Assert.AreEqual(3.0, calc.getEarlyHoursWorked(family, endAtEightPM));
         }
 
         [TestMethod]
         public void whenGetMiddleHoursIsPassedAnEndTimeAfterMiddleTimeWindowItReturnsHoursWorkedInThatWindow()
         {
             Night night = new Night("5:00PM", "1:00AM");
-            Assert.AreEqual(2.0, calc.getMiddleHours(family, night));
+            Assert.AreEqual(2.0, calc.getMiddleHoursWorked(family, night));
         }
 
         [TestMethod]
         public void whenGetMiddleHoursIsPassedAnEndTimeBetweenMiddleTimeWindowItReturnsHoursWorkedInThatWindow()
         {
             Night night = new Night("5:00PM", "11:00PM");
-            Assert.AreEqual(1.0, calc.getMiddleHours(family, night));
+            Assert.AreEqual(1.0, calc.getMiddleHoursWorked(family, night));
         }
 
         [TestMethod]
         public void whenGetMiddleHoursHasAnEndTimeLessThanTheMiddleTimeWindowItReturns0()
         {
-            Assert.AreEqual(0, calc.getMiddleHours(family, endAtEightPM));
+            Assert.AreEqual(0, calc.getMiddleHoursWorked(family, endAtEightPM));
         }
 
 
         [TestMethod]
         public void whenGetLateHoursHasAnEndTimeGreaterThanLateBeginTimeReturnsHours()
         {
-            Assert.AreEqual(2.0, calc.getLateHours(family, endAtTwoAM));
+            Assert.AreEqual(2.0, calc.getLateHoursWorked(family, endAtTwoAM));
         }
 
         [TestMethod]
         public void whenGetLateHoursHasAnEndTimeLessThanLateBeginTimeReturnsZero()
         {
-            Assert.AreEqual(0, calc.getLateHours(family, endAtElevenPM));
+            Assert.AreEqual(0, calc.getLateHoursWorked(family, endAtElevenPM));
         }
 
         [TestMethod]

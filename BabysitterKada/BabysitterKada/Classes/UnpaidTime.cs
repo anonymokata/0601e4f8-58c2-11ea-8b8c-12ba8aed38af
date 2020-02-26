@@ -10,7 +10,7 @@ namespace BabysitterKada.Classes
 
         public UnpaidTime (double fractionalHours)
         {
-            this.unpaidFractionalHoursRemaining = Math.Round(fractionalHours, 2);
+            unpaidFractionalHoursRemaining = Math.Round(fractionalHours, 2);
         }
 
         public double deductUnpaidFractionalHoursFrom(double hoursWorked)

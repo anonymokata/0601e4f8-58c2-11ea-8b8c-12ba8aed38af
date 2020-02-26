@@ -23,8 +23,6 @@ namespace BabysitterKada.Classes
             this.EndTime = Time.parseStringToDateTimeAndAddDayIfAM(endTime);
 
             validateInputs();
-
-
         }
 
         private double calculateTotalHoursWorked()

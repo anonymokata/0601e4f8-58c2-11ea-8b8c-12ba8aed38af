@@ -7,7 +7,7 @@ using BabysitterKada.Classes;
 namespace BabysitterKadaTests
 {
     [TestClass]
-    public class IntegrationTests
+    public class FamilyAIntegrationTests
     {
         Night sixToElevenPM = new Night("6:00PM", "11:00PM");
         Night eightToThreeAM = new Night("8:00PM", "3:00AM");
@@ -22,25 +22,25 @@ namespace BabysitterKadaTests
         FamilyC familyC = new FamilyC();
 
         [TestMethod]
-        public void whenFamilyAGivenSixToElevenPMreturnsSeventyFive()
+        public void whenFamilyAGivenSixToElevenPMreturnsFiveHoursEarlyTime()
         {
             Assert.AreEqual(75.0, calc.CalculatePay(familyA, sixToElevenPM));
         }
 
         [TestMethod]
-        public void whenFamilyAGivenEightToThreeAM()
+        public void whenFamilyAGivenEightToThreeAMReturnsThreeHoursEarlyTimeThreeHoursLateTime()
         {
             Assert.AreEqual(125.0, calc.CalculatePay(familyA, eightToThreeAM));
         }
 
         [TestMethod]
-        public void whenFamilyAGivenNineThirtyToMidnight()
+        public void whenFamilyAGivenNineThirtyToMidnightPaysHalfAnHourEarlyTimeAndOneAndHalfHoursMiddleTime()
         {
             Assert.AreEqual(32.50, calc.CalculatePay(familyA, nineThirtyToMidnight));
         }
 
         [TestMethod]
-        public void whenFamilyAGivenNineThirtyToTwelveThirtyAM()
+        public void whenFamilyAGivenNineThirtyToTwelveThirtyAMPaysHalfAnHourEarlyTimeAndTwoHoursMiddleTimeAndHalfHourLateTime()
         {
             Assert.AreEqual(52.50, calc.CalculatePay(familyA, nineThirtyToTwelveThirtyAM));
         }
@@ -50,5 +50,7 @@ namespace BabysitterKadaTests
         {
             Assert.AreEqual(20.0, calc.CalculatePay(familyA, oneFifteenToThreeAM));
         }
+
+
     }
 }

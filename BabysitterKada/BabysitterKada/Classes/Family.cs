@@ -18,11 +18,11 @@ namespace BabysitterKada.Classes
         {
             Time.throwExceptionIfInputIsInvalidTimeStringFormat(earlyRateEndsAt);
 
-            this.EarlyRate = earlyRate;
-            this.LateRate = lateRate;
-            this.EarlyRateEndsAt = Time.parseStringToDateTimeAndAddDayIfAM(earlyRateEndsAt);
+            EarlyRate = earlyRate;
+            LateRate = lateRate;
+            EarlyRateEndsAt = Time.parseStringToDateTimeAndAddDayIfAM(earlyRateEndsAt);
             
-            LateRateBeginsAt = this.EarlyRateEndsAt;
+            LateRateBeginsAt = EarlyRateEndsAt;
         }
 
         public Family(double earlyRate, double middleRate, double lateRate, string earlyRateEndsAt, string middleRateEndsAt)
@@ -30,14 +30,14 @@ namespace BabysitterKada.Classes
             Time.throwExceptionIfInputIsInvalidTimeStringFormat(earlyRateEndsAt);
             Time.throwExceptionIfInputIsInvalidTimeStringFormat(middleRateEndsAt);
             
-            this.EarlyRate = earlyRate;
-            this.LateRate = lateRate;
-            this.MiddleRate = middleRate;
+            EarlyRate = earlyRate;
+            LateRate = lateRate;
+            MiddleRate = middleRate;
 
-            this.EarlyRateEndsAt = Time.parseStringToDateTimeAndAddDayIfAM(earlyRateEndsAt);
-            this.MiddleRateEndsAt = Time.parseStringToDateTimeAndAddDayIfAM(middleRateEndsAt);
+            EarlyRateEndsAt = Time.parseStringToDateTimeAndAddDayIfAM(earlyRateEndsAt);
+            MiddleRateEndsAt = Time.parseStringToDateTimeAndAddDayIfAM(middleRateEndsAt);
             
-            LateRateBeginsAt = this.MiddleRateEndsAt;
+            LateRateBeginsAt = MiddleRateEndsAt;
         }
     }
 }
