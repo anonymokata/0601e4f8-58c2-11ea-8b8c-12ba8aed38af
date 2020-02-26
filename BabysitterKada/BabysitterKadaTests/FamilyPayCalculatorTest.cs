@@ -16,7 +16,7 @@ namespace BabysitterKadaTests
         FamilyPayCalculator calc = new FamilyPayCalculator();
 
        [TestMethod]
-        public void whenGetEarlyHoursIsGivenEndTimeAfterEarlyCutoffItIgnoresHoursAfterCutoff()
+        public void whenGetEarlyHoursIsGivenEndTimeAfterEarlyCutoffItReturnsOnlyHoursBeforeCutoff()
         {
             Night night = new Night("5:00PM", "1:00AM");
             Assert.AreEqual(5.0, calc.getEarlyHoursWorked(family, night));
@@ -29,46 +29,46 @@ namespace BabysitterKadaTests
         }
 
         [TestMethod]
-        public void whenGetMiddleHoursIsPassedAnEndTimeAfterMiddleTimeWindowItReturnsHoursWorkedInThatWindow()
+        public void whenGetMiddleHoursHasMaxHoursWorkedReturnsHoursWorkedInThatWindow()
         {
             Night night = new Night("5:00PM", "1:00AM");
             Assert.AreEqual(2.0, calc.getMiddleHoursWorked(family, night));
         }
 
         [TestMethod]
-        public void whenGetMiddleHoursIsPassedAnEndTimeBetweenMiddleTimeWindowItReturnsHoursWorkedInThatWindow()
+        public void whenGetMiddleHoursHasPartialHoursWorkedInThatWindowReturnsPartialHours()
         {
             Night night = new Night("5:00PM", "11:00PM");
             Assert.AreEqual(1.0, calc.getMiddleHoursWorked(family, night));
         }
 
         [TestMethod]
-        public void whenGetMiddleHoursHasAnEndTimeLessThanTheMiddleTimeWindowItReturns0()
+        public void whenGetMiddleHoursHasNoHoursWorkedInWindowReturnsZero()
         {
             Assert.AreEqual(0, calc.getMiddleHoursWorked(family, endAtEightPM));
         }
 
 
         [TestMethod]
-        public void whenGetLateHoursHasAnEndTimeGreaterThanLateBeginTimeReturnsHours()
+        public void whenGetLateHoursHasHoursWorkedInLateWindowReturnsHours()
         {
             Assert.AreEqual(2.0, calc.getLateHoursWorked(family, endAtTwoAM));
         }
 
         [TestMethod]
-        public void whenGetLateHoursHasAnEndTimeLessThanLateBeginTimeReturnsZero()
+        public void whenGetLateHoursHasNoHoursWorkedInWindowReturnZero()
         {
             Assert.AreEqual(0, calc.getLateHoursWorked(family, endAtElevenPM));
         }
 
         [TestMethod]
-        public void whenCalculatePayIsCalledForJustEarlyRateItReturnsCorrectDolars()
+        public void whenCalculatePayIsCalledForFamilyWithJustEarlyRateHoursItReturnsCorrectDolars()
         {
             Assert.AreEqual(36.0, calc.CalculatePay(family, endAtEightPM));
         }
 
         [TestMethod]
-        public void whenCalculatePayIsCalledForEarlyAndMiddleRateItReturnsCorrectDollars()
+        public void whenCalculatePayIsCalledForFamilyWithEarlyAndMiddleRateHoursItReturnsCorrectDollars()
         {
             Night night = new Night("8:00PM", "11:00PM");
             Assert.AreEqual(32.0, calc.CalculatePay(family, night));
@@ -76,7 +76,7 @@ namespace BabysitterKadaTests
 
 
         [TestMethod]
-        public void whenCalculatePayIsCalledForEarlyAndMiddleAndLateRateItReturnsCorrectDollars()
+        public void whenCalculatePayIsCalledForFamilyWithEarlyAndMiddleAndLateRateHoursItReturnsCorrectDollars()
         {
             Night night = new Night("8:00PM", "2:00AM");
             Assert.AreEqual(72.0, calc.CalculatePay(family, night));
@@ -84,7 +84,7 @@ namespace BabysitterKadaTests
 
 
         [TestMethod]
-        public void whenCalculatePayIsCalledForFamilyWithNoMiddleRateReturnsCorrectDollars()
+        public void whenCalculatePayIsCalledForFamilyWithNoMiddleRateHoursReturnsCorrectDollars()
         {
             Family family = new Family(15, 20, "11:00PM");
             Night night = new Night("9:00PM", "1:00AM");
@@ -92,7 +92,7 @@ namespace BabysitterKadaTests
         }
 
         [TestMethod]
-        public void whenCalculatePayHasFractionalEarlyHoursOnlyItPaysOnlyWholeHours ()
+        public void whenCalculatePayHasFractionalEarlyHoursOnlyItPaysOnlyWholeHours()
         {
             Night endAtEightThirtyPM = new Night("5:00PM", "8:30PM");
             Assert.AreEqual(36.0, calc.CalculatePay(family, endAtEightThirtyPM));
@@ -112,14 +112,12 @@ namespace BabysitterKadaTests
             Assert.AreEqual(60.0, calc.CalculatePay(family, endAtFraction));
         }
 
-
         [TestMethod]
         public void whenNightStartsAfterEarlyHoursCalculatesCorrectPay()
         {
             Night noEarlyHours = new Night("11:00PM", "1:00AM");
             Assert.AreEqual(24.0, calc.CalculatePay(family, noEarlyHours));
         }
-
 
         [TestMethod]
         public void whenNightHasOnlyLateHoursCalculatesCorrectPay()
