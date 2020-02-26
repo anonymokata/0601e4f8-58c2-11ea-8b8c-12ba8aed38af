@@ -1,6 +1,6 @@
 ### Building and Running Solution/Tests
 
-The solution was built in Visual Studio 2019. The easiest way to build and run everything is open the BabysitterKada.sln in Visual Studio.
+The solution was built in Visual Studio 2019. The easiest way to run everything is open the BabysitterKada.sln in Visual Studio and build the solution to create the executable.
 
 Tests were written with MSTest. If you have MSTest installed you can run the command
 
@@ -8,7 +8,7 @@ dotnet test
 
 From the BabySitterKadaTests directory in command line. But again, easier to use the test explorer in Visual Studio.
 
-I don't have any experience building c# solutions outside of Visual Studio so I'm hoping this is all you need!
+I don't have any experience building c# solutions outside of Visual Studio so I'm hoping if you don't use VS you know better how to do it then me!
 
 ### Notes on solution and asssumptions made
 
