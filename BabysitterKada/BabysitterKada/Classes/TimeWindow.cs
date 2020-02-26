@@ -6,12 +6,12 @@ namespace BabysitterKada.Classes
 {
     public class TimeWindow
     {
-        private DateTime windowStart { get; }
-        private DateTime windowEnd { get; }
+        public DateTime WindowStart { get; }
+        public DateTime WindowEnd { get; }
         public TimeWindow(DateTime windowStart, DateTime windowEnd)
         {
-            this.windowStart = windowStart;
-            this.windowEnd = windowEnd;
+            WindowStart = windowStart;
+            WindowEnd = windowEnd;
         }
 
         public double getHoursWorkedWithinATimeWindow(DateTime startTime, DateTime endTime)
@@ -23,7 +23,7 @@ namespace BabysitterKada.Classes
             }
             else if (startIsBeforeWindowAndEndFallsInWindow(startTime, endTime))
             {
-                hoursWorked = hoursBetween(windowStart, endTime);
+                hoursWorked = hoursBetween(WindowStart, endTime);
             }
             else if (startIsInWindowAndEndIsToo(startTime, endTime))
             {
@@ -31,7 +31,7 @@ namespace BabysitterKada.Classes
             }
             else if (startIsInWindowButEndIsOutOfWindow(startTime, endTime))
             {
-                hoursWorked = hoursBetween(startTime, windowEnd);
+                hoursWorked = hoursBetween(startTime, WindowEnd);
             }
             else
             {
@@ -49,27 +49,27 @@ namespace BabysitterKada.Classes
 
         private Boolean noHoursWorkedInThisWindow(DateTime startTime, DateTime endTime)
         {
-            return startTime >= windowEnd || endTime <= windowStart;
+            return startTime >= WindowEnd || endTime <= WindowStart;
         }
 
         private Boolean startIsBeforeWindowAndEndFallsInWindow(DateTime startTime, DateTime endTime)
         {
-            return startTime <= windowStart && endTime <= windowEnd;
+            return startTime <= WindowStart && endTime <= WindowEnd;
         }
 
         private Boolean startIsInWindowAndEndIsToo(DateTime startTime, DateTime endTime)
         {
-            return startTime >= windowStart && endTime <= windowEnd;
+            return startTime >= WindowStart && endTime <= WindowEnd;
         }
 
         private Boolean startIsInWindowButEndIsOutOfWindow(DateTime startTime, DateTime endTime)
         {
-            return startTime >= windowStart && endTime >= windowEnd;
+            return startTime >= WindowStart && endTime >= WindowEnd;
         }
 
         private double fullHoursInWindow()
         {
-            return hoursBetween(windowStart, windowEnd);
+            return hoursBetween(WindowStart, WindowEnd);
         }
     }
 }
